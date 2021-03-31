@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "88607264913",
+    "project_id": "andriodappauth",
+    "storage_bucket": "andriodappauth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88607264913:android:a89dee6fceadaae1fa2f30",
+        "android_client_info": {
+          "package_name": "com.example.teachingtoddlers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "88607264913-8jupevj2lqa42d46g3a43fk8bpcmd2q8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmkRJOv5VR3hw-5Ou0tyFY4DKo5mtRvC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "88607264913-8jupevj2lqa42d46g3a43fk8bpcmd2q8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
