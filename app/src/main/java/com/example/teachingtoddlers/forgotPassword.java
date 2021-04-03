@@ -63,10 +63,10 @@ public class forgotPassword extends AppCompatActivity {
 
                         if(task.isSuccessful()){
 
-                            Toast.makeText(forgotPassword.this, "Please Check Your Email", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(forgotPassword.this, "Please Check Your Email", Toast.LENGTH_LONG).show();
 
                         }else{
-                            Toast.makeText(forgotPassword.this, "Error" +task.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(forgotPassword.this, "Error: Your email is not in our database", Toast.LENGTH_LONG).show();
 
                         }
 

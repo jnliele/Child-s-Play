@@ -7,4 +7,6 @@
     <string name="email">email</string>
     <string name="Email">Email</string>
     <string name="Enter">Enter</string>
+    <string name="enter_your_email_to_recover_your_password">Enter your email to recover your password:</string>
+    <string name="create_an_account">create an account</string>
 </resources>
