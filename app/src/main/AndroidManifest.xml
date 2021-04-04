@@ -9,8 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TeachingToddlers">
-        <activity android:name=".createAccount"></activity>
-        <activity android:name=".forgotPassword" />
+        <activity android:name=".forgotPassword"></activity>
         <activity android:name=".LoginPage" />
         <activity android:name=".MainActivity">
             <intent-filter>
