@@ -9,4 +9,12 @@
     <string name="Enter">Enter</string>
     <string name="enter_your_email_to_recover_your_password">Enter your email to recover your password:</string>
     <string name="create_an_account">create an account</string>
+    <string name="register_user">Register User</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="uta_id">UTA ID</string>
+    <string name="password">Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="profession">Profession</string>
+    <string name="admin_setup">Admin Setup</string>
 </resources>
