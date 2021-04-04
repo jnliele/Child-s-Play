@@ -132,8 +132,7 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
                             progressBar.setVisibility(View.GONE);
                         }
                     }
-                }) {
-                }
+                });
 
     }
 }
