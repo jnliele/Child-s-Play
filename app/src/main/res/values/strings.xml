@@ -12,7 +12,7 @@
     <string name="register_user">Register User</string>
     <string name="e_mail">E-Mail</string>
     <string name="uta_id">UTA ID</string>
-    <string name="password">Password</string>
+    <string name="createPassword">Password</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="profession">Profession</string>
