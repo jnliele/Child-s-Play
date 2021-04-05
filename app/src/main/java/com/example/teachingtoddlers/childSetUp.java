@@ -22,7 +22,7 @@ public class childSetUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child_set_up);
 
-        radioGroup= findViewById(R.id.radioGroup);
+        radioGroup = findViewById(R.id.radioGroup);
         continueButton = findViewById(R.id.continueButton);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override

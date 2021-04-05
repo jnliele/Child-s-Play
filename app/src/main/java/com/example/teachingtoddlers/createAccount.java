@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,13 +40,15 @@ import java.util.UUID;
 public class createAccount extends AppCompatActivity implements View.OnClickListener{
 
     private TextView register;
-    private EditText emailUsername, firstName, lastName, UTAID, password, profession;
+    private EditText emailUsername, firstName, lastName, UTAID, password, profession, childfirstName, childlastName;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
     private ImageView profilePic;
     public Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
+    private RadioGroup radioGroup;
+    private RadioButton radioButton;
 
 
     @Override
@@ -66,6 +70,9 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
         password = (EditText) findViewById(R.id.PW);
         profession = (EditText) findViewById(R.id.profession);
 
+        childfirstName = (EditText) findViewById(R.id.childFirstName);
+        childlastName = (EditText) findViewById(R.id.childLastName);
+
         profilePic = findViewById(R.id.profilePic);
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -76,6 +83,9 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
             }
         });
 
+        radioGroup = findViewById(R.id.radioGroup);
+        int radioID= radioGroup.getCheckedRadioButtonId();
+        radioButton=findViewById(radioID);
     }
 
     private void choosePicture(){
@@ -144,6 +154,11 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
         String prof = profession.getText().toString().trim();
         String pw = password.getText().toString().trim();
 
+        String cfname = childfirstName.getText().toString().trim();
+        String clname = childlastName.getText().toString().trim();
+
+        String ageRange = radioButton.getText().toString();
+
         progressBar.setVisibility(View.VISIBLE);
 
         if(email.isEmpty()){
@@ -191,12 +206,30 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
             return;
         }
 
+        if(cfname.isEmpty()){
+            childfirstName.setError("Child's First Name is required!");
+            childfirstName.requestFocus();
+            return;
+        }
+        if(clname.isEmpty()){
+            childlastName.setError("Child's Last Name is required!");
+            childlastName.requestFocus();
+            return;
+        }
+
+        if(ageRange.isEmpty()){
+            radioButton.setError("Age range is required!");
+            radioButton.requestFocus();
+            return;
+        }
+
+
         auth.createUserWithEmailAndPassword(email, pw)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            User user = new User(email, fname, lname, utaID, prof, pw);
+                            User user = new User(email, fname, lname, utaID, prof, pw, cfname, clname, ageRange);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
