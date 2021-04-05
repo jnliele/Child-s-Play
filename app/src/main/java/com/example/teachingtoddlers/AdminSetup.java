@@ -37,7 +37,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.UUID;
 
-public class createAccount extends AppCompatActivity implements View.OnClickListener{
+public class AdminSetup extends AppCompatActivity implements View.OnClickListener{
 
     private TextView register;
     private EditText emailUsername, firstName, lastName, UTAID, password, profession, childfirstName, childlastName;
@@ -54,7 +54,7 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_account);
+        setContentView(R.layout.activity_admin_setup);
 
         auth = FirebaseAuth.getInstance();
 
@@ -237,16 +237,16 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
-                                        Toast.makeText(createAccount.this, "You have been registered successfully!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AdminSetup.this, "You have been registered successfully!", Toast.LENGTH_LONG).show();
                                         progressBar.setVisibility(View.VISIBLE);
                                     }else{
-                                        Toast.makeText(createAccount.this, "Failed to register!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(AdminSetup.this, "Failed to register!", Toast.LENGTH_LONG).show();
                                         progressBar.setVisibility(View.GONE);
                                     }
                                 }
                             });
                         }else{
-                            Toast.makeText(createAccount.this, "Failed to register!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(AdminSetup.this, "Failed to register!", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }

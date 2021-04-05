@@ -11,7 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class childSetUp extends AppCompatActivity {
+public class accountCreation extends AppCompatActivity {
 
     RadioGroup radioGroup;
     RadioButton radioButton;
@@ -27,15 +27,15 @@ public class childSetUp extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(childSetUp.this, createAccount.class));
+                startActivity(new Intent(accountCreation.this, AdminSetup.class));
             }
         });
     }
 
     public void checkButton(View view) {
 
-      //  int radioID= radioGroup.getCheckedRadioButtonId();
-      //  radioButton=findViewById(radioID);
+        //  int radioID= radioGroup.getCheckedRadioButtonId();
+        //  radioButton=findViewById(radioID);
 
     }
 }

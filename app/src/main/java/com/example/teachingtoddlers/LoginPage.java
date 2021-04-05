@@ -34,7 +34,8 @@ public class LoginPage extends AppCompatActivity {
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginPage.this, childSetUp.class));
+                startActivity(new Intent(LoginPage.this, accountCreation.class));
+
             }
         });
     }
