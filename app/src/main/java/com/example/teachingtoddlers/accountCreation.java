@@ -20,22 +20,15 @@ public class accountCreation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_child_set_up);
+        setContentView(R.layout.activity_account_creation);
 
         radioGroup = findViewById(R.id.radioGroup);
-        continueButton = findViewById(R.id.continueButton);
+        continueButton = (Button)findViewById(R.id.continueButton);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(accountCreation.this, AdminSetup.class));
+                startActivity(new Intent(accountCreation.this, newAdmin.class));
             }
         });
-    }
-
-    public void checkButton(View view) {
-
-        //  int radioID= radioGroup.getCheckedRadioButtonId();
-        //  radioButton=findViewById(radioID);
-
     }
 }

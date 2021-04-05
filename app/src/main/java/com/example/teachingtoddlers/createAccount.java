@@ -229,7 +229,7 @@ public class createAccount extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            User user = new User(email, fname, lname, utaID, prof, pw, cfname, clname, ageRange);
+                            User user = new User(email, fname, lname, utaID, prof, pw);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
