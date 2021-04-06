@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TeachingToddlers">
-        <activity android:name=".newAdmin"></activity>
-        <activity android:name=".AdminSetup" />
+        <activity android:name=".homePage"></activity>
+        <activity android:name=".newAdmin" />
         <activity android:name=".accountCreation" />
         <activity android:name=".forgotPassword" />
         <activity android:name=".LoginPage" />
@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

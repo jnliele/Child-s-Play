@@ -3,6 +3,7 @@ package com.example.teachingtoddlers;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -127,6 +128,8 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
                                         Toast.makeText(newAdmin.this, "You have been registered successfully!", Toast.LENGTH_LONG).show();
+                                        Intent home= new Intent(newAdmin.this, homePage.class);
+                                        startActivity(home);
                                     }else{
                                         Toast.makeText(newAdmin.this, "Failed to register!", Toast.LENGTH_LONG).show();
                                     }
