@@ -1,8 +1,10 @@
 package com.example.teachingtoddlers;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,21 +20,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.UUID;
 
 public class newAdmin extends AppCompatActivity implements View.OnClickListener{
 
     private TextView register;
     private EditText emailUsername, firstName, lastName, UTAID, password, profession;
     private FirebaseAuth auth;
+    private ImageView avatar;
     public Uri imageUri;
     private FirebaseStorage storage;
-    private StorageReference storageReference;
+    private StorageReference storageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +60,67 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
         UTAID = (EditText) findViewById(R.id.editTextTextPersonName4);
         password = (EditText) findViewById(R.id.editTextTextPassword);
         profession = (EditText) findViewById(R.id.editTextTextPersonName5);
+        avatar = findViewById(R.id.avatar);
+
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+
+        // allow user to tap on image and upload a profile picture
+        avatar.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v){
+               choosePicture();
+           }
+        });
+    }
+
+    private void choosePicture(){
+        Intent intent = new Intent(); // opens up phone gallery
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            imageUri = data.getData();
+            avatar.setImageURI(imageUri);
+            uploadPicture();
+        }
+    }
+
+    private void uploadPicture(){
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setTitle("Uploading image...");
+        pd.show();
+
+        final String randomKey = UUID.randomUUID().toString();
+        StorageReference riversRef = storageRef.child("images/" + randomKey);
+
+        riversRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot){
+                        pd.dismiss();
+                        Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener(){
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        pd.dismiss();
+                        Toast.makeText(getApplicationContext(), "Failed to Upload", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        double progressPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                        pd.setMessage("Percentage: " + (int) progressPercent + "%");
+                    }
+                });
     }
 
     @Override
