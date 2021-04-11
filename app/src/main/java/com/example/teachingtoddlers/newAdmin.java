@@ -43,6 +43,7 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
     public Uri imageUri;
     private FirebaseStorage storage;
     private StorageReference storageRef;
+    public String image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,13 +93,18 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void uploadPicture(){
+        // uploads the picture to database
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setTitle("Uploading image...");
         pd.show();
 
         final String randomKey = UUID.randomUUID().toString();
         StorageReference riversRef = storageRef.child("images/" + randomKey);
+        image = "images/" + randomKey;
 
+        // attempt to upload the picture to database
+        // two different cases: success and failure
+        // also includes a progress bar
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>(){
                     @Override
@@ -133,6 +139,13 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void registerUser() {
+        // pass in information from child setup
+        Intent intent = getIntent();
+        String childFirst = intent.getStringExtra(accountCreation.EXTRA_FIRST);
+        String childLast = intent.getStringExtra(accountCreation.EXTRA_LAST);
+        String ageRange = intent.getStringExtra(accountCreation.EXTRA_AGE);
+
+        // get the string value of admin setup input
         String email = emailUsername.getText().toString().trim();
         String fname = firstName.getText().toString().trim();
         String lname = lastName.getText().toString().trim();
@@ -140,6 +153,7 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
         String prof = profession.getText().toString().trim();
         String pw = password.getText().toString().trim();
 
+        // ensure that no fields are empty
         if(email.isEmpty()){
             emailUsername.setError("Email is required!");
             emailUsername.requestFocus();
@@ -190,7 +204,7 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            User user = new User(email, fname, lname, utaID, prof, pw);
+                            User user = new User(email, fname, lname, utaID, prof, pw, childFirst, childLast, ageRange, image);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

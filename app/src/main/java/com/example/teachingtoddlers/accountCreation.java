@@ -15,6 +15,10 @@ import android.widget.Toast;
 
 public class accountCreation extends AppCompatActivity {
 
+    public static final String EXTRA_FIRST = "com.example.teachingtoddlers.EXTRA_FIRST";
+    public static final String EXTRA_LAST = "com.example.teachingtoddlers.EXTRA_LAST";
+    public static final String EXTRA_AGE = "com.example.teachingtoddlers.EXTRA_AGE";
+
     RadioGroup radioGroup;
     RadioButton radioButton;
     Button continueButton;
@@ -56,11 +60,14 @@ public class accountCreation extends AppCompatActivity {
                 // get the value of selected radio button
                 int radioId = radioGroup.getCheckedRadioButtonId();
                 radioButton = findViewById(radioId);
+                String ageRange = radioButton.getText().toString().trim(); // 1-3 years old, 3-5 years old, 5-7 years old
 
-                // radioButton.getText()          <- this gets the value of the radio button i.e. "1-3 years old"
-
-                // all information valid, go to admin setup
-                startActivity(new Intent(accountCreation.this, newAdmin.class));
+                // all information valid, pass child info to admin setup, and go to admin setup
+                Intent intent = new Intent(accountCreation.this, newAdmin.class);
+                intent.putExtra(EXTRA_FIRST, childfName);
+                intent.putExtra(EXTRA_LAST, childlName);
+                intent.putExtra(EXTRA_AGE, ageRange);
+                startActivity(intent);
             }
         });
     }

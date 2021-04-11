@@ -10,9 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeachingToddlers">
         <activity android:name=".homePage"></activity>
-        <activity android:name=".newAdmin" />
-        <activity android:name=".accountCreation" />
-        <activity android:name=".forgotPassword" />
+        <activity android:name=".newAdmin"
+            android:parentActivityName=".accountCreation"/>
+        <activity android:name=".accountCreation"
+            android:parentActivityName=".LoginPage"/>
+        <activity android:name=".forgotPassword"
+            android:parentActivityName=".LoginPage"/>
         <activity android:name=".LoginPage" />
         <activity android:name=".MainActivity">
             <intent-filter>
