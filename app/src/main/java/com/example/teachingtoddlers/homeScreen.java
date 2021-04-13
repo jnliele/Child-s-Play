@@ -23,7 +23,7 @@ public class homeScreen extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    //public Button logout;
+    public Button logout;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -54,18 +54,6 @@ public class homeScreen extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
-        logout = (Button)getView().findViewById(R.id.UserLogsOut);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent home = new Intent(getActivity(), LoginPage.class);
-                startActivity(home);
-                getActivity().finish();
-            }
-        });
-        */
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -76,6 +64,20 @@ public class homeScreen extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_screen, container, false);
+        View view =  inflater.inflate(R.layout.fragment_home_screen, container, false);
+
+        // functionality for logout button
+        logout = (Button) view.findViewById(R.id.UserLogsOut);
+        logout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                FirebaseAuth.getInstance().signOut();
+                Intent home = new Intent(getActivity(), LoginPage.class);
+                startActivity(home);
+                getActivity().finish();
+            }
+        });
+
+        return view;
     }
 }

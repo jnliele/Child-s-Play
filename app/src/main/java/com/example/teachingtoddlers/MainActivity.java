@@ -13,19 +13,11 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity  {
     private static int LOGO_TIME = 3000; // show logo for 3 seconds
-    TextView forgotPass;
-    TextView createAccount;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // get the id for forgot password link
-        forgotPass = (findViewById(R.id.forgotPassword));
-
-        // get the id for create an account link
-        createAccount = (findViewById(R.id.createAnAccount));
 
         // redirects to login page after showing logo for 3 seconds
         new Handler().postDelayed(new Runnable() {

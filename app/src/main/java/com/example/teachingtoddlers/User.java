@@ -7,6 +7,7 @@ public class User {
     public User(){
     }
 
+    // constructor to store all the information upon registration for database
     public User(String email, String fname, String lname, String utaID, String prof, String pw,
                 String childFirst, String childLast, String ageRange, String image){
         this.email = email;

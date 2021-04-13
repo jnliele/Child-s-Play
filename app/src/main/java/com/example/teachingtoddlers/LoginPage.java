@@ -40,15 +40,15 @@ public class LoginPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
-        // get id for forgot password link
 
+        // set up database and get id from xml for input/ui components
         auth=FirebaseAuth.getInstance();
         emailUsername=findViewById(R.id.username);
         password=findViewById(R.id.password);
         progressDialog=new ProgressDialog(this);
         SignInButton=findViewById(R.id.login);
 
-
+        // login button
         SignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +57,7 @@ public class LoginPage extends AppCompatActivity {
         });
 
 
-
+        // get id for forgot password link
         forgotPass = (TextView) (findViewById(R.id.forgotPassword));
 
         // redirect to forgot password page
@@ -83,9 +83,11 @@ public class LoginPage extends AppCompatActivity {
 
 
         private void Login(){
+            // get user input
             String email = emailUsername.getText().toString().trim();
             String pw = password.getText().toString().trim();
 
+            // ensure user didn't leave any empty fields
             if(email.isEmpty()){
                 emailUsername.setError("Email is required!");
                 emailUsername.requestFocus();
@@ -106,17 +108,17 @@ public class LoginPage extends AppCompatActivity {
             progressDialog.show();
             progressDialog.setCanceledOnTouchOutside(false);
 
-
+            // confirm whether user was able to log in or not
             auth.signInWithEmailAndPassword(email, pw)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(LoginPage.this, "You have successfully Logged in!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginPage.this, "You have successfully logged in!", Toast.LENGTH_LONG).show();
                                  Intent home= new Intent(LoginPage.this, homePage.class);
                                  startActivity(home);
                             }else{
-                                Toast.makeText(LoginPage.this, "Sign in Fail!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginPage.this, "Sign in failed!", Toast.LENGTH_LONG).show();
                             }
                             progressDialog.dismiss();
                         }

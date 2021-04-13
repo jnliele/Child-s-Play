@@ -35,22 +35,18 @@ public class forgotPassword extends AppCompatActivity {
 
         submit = (Button) (findViewById(R.id.enterButton));
         emailOfUser = (EditText)(findViewById(R.id.Email));
-        //auth.getInstance();
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-              //  restPassword();
+                // restPassword();
+                // get email inputted
                 String email=emailOfUser.getText().toString().trim();
 
-
-               auth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                // validate email input
+                auth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-
 
                         if(email.isEmpty()){
 
@@ -66,7 +62,7 @@ public class forgotPassword extends AppCompatActivity {
 
                         if(task.isSuccessful()){
 
-                            Toast.makeText(forgotPassword.this, "Please Check Your Email", Toast.LENGTH_LONG).show();
+                            Toast.makeText(forgotPassword.this, "Please check your email", Toast.LENGTH_LONG).show();
 
                         }else{
                             Toast.makeText(forgotPassword.this, "Error: Your email is not in our database", Toast.LENGTH_LONG).show();

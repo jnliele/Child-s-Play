@@ -15,10 +15,12 @@ import android.widget.Toast;
 
 public class accountCreation extends AppCompatActivity {
 
+    // variables to help pass input information from child setup to admin setup
     public static final String EXTRA_FIRST = "com.example.teachingtoddlers.EXTRA_FIRST";
     public static final String EXTRA_LAST = "com.example.teachingtoddlers.EXTRA_LAST";
     public static final String EXTRA_AGE = "com.example.teachingtoddlers.EXTRA_AGE";
 
+    // variables to obtain the choice selected for child age range
     RadioGroup radioGroup;
     RadioButton radioButton;
     Button continueButton;

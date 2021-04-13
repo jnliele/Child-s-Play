@@ -52,9 +52,11 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
 
         auth = FirebaseAuth.getInstance();
 
+        // get id for register button and enable an action
         register = (Button) findViewById(R.id.button2);
         register.setOnClickListener(this);
 
+        // get id from xml
         emailUsername = (EditText) findViewById(R.id.editTextTextEmailAddress);
         firstName = (EditText) findViewById(R.id.editTextTextPersonName2);
         lastName = (EditText) findViewById(R.id.editTextTextPersonName3);
@@ -63,6 +65,7 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
         profession = (EditText) findViewById(R.id.editTextTextPersonName5);
         avatar = findViewById(R.id.avatar);
 
+        // set up firebase database storage for image upload
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
 
@@ -76,7 +79,8 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void choosePicture(){
-        Intent intent = new Intent(); // opens up phone gallery
+        // function to open up phone gallery and allow user to choose picture
+        Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, 1);
@@ -84,6 +88,7 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // function to get image data that user chooses
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri = data.getData();
@@ -98,6 +103,7 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
         pd.setTitle("Uploading image...");
         pd.show();
 
+        // create a unique name for photo to be uploaded in database
         final String randomKey = UUID.randomUUID().toString();
         StorageReference riversRef = storageRef.child("images/" + randomKey);
         image = "images/" + randomKey;
@@ -166,14 +172,25 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
         }
 
         if(fname.isEmpty()){
-            firstName.setError("First Name is required!");
+            firstName.setError("First name is required!");
             firstName.requestFocus();
             return;
         }
 
         if(lname.isEmpty()){
-            lastName.setError("Last Name is required!");
+            lastName.setError("Last name is required!");
             lastName.requestFocus();
+            return;
+        }
+
+        if(pw.isEmpty()){
+            password.setError("A password is required!");
+            password.requestFocus();
+            return;
+        }
+        if(pw.length() > 20){
+            password.setError("Password must not exceed 20 characters!");
+            password.requestFocus();
             return;
         }
 
@@ -188,17 +205,7 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
             profession.requestFocus();
         }
 
-        if(pw.isEmpty()){
-            password.setError("A Password is required!");
-            password.requestFocus();
-            return;
-        }
-        if(pw.length() > 20){
-            password.setError("Password must not exceed 20 characters!");
-            password.requestFocus();
-            return;
-        }
-
+        // functionality for when user hits register button
         auth.createUserWithEmailAndPassword(email, pw)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
