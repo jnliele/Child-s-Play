@@ -3,10 +3,10 @@
 
     <item
         android:id="@+id/homeScreen"
-        android:title="homeScreen"
+        android:title="Home"
         android:icon="@drawable/ic_home"/>
     <item
         android:id="@+id/profilePage"
-        android:title="profilePage"
+        android:title="Profile"
         android:icon="@drawable/ic_profile"/>
 </menu>

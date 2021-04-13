@@ -2,11 +2,16 @@ package com.example.teachingtoddlers;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.teachingtoddlers.SectionPagerAdapter.SectionPagerAdapter;
+import com.google.android.material.tabs.TabLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +19,11 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class profilePage extends Fragment {
+
+    // create fragments and tab for child and admin profile page
+    View fragments;
+    ViewPager viewPager;
+    TabLayout tabLayout;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +69,49 @@ public class profilePage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_page, container, false);
+        fragments = inflater.inflate(R.layout.fragment_profile_page, container, false);
+
+        // get id from xml
+        viewPager = fragments.findViewById(R.id.viewPager);
+        tabLayout = fragments.findViewById(R.id.tabLayout);
+
+        return fragments;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        // set up tabs
+        setUpViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+
+        // function for state of tabs
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+            @Override
+            public void onTabSelected(TabLayout.Tab tab){
+
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab){
+
+            }
+            @Override
+            public void onTabReselected(TabLayout.Tab tab){
+
+            }
+        });
+    }
+
+    private void setUpViewPager(ViewPager viewPager) {
+        // set up adapter for tabs
+        SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
+
+        // add fragments to tab
+        adapter.addFragment(new ChildProfileFragment(), "Child");
+        adapter.addFragment(new AdminProfileFragment(), "Admin");
+
+        // run adapter to display tabs
+        viewPager.setAdapter(adapter);
     }
 }
