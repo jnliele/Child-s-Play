@@ -9,13 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TeachingToddlers">
-        <activity android:name=".homePage"></activity>
-        <activity android:name=".newAdmin"
-            android:parentActivityName=".accountCreation"/>
-        <activity android:name=".accountCreation"
-            android:parentActivityName=".LoginPage"/>
-        <activity android:name=".forgotPassword"
-            android:parentActivityName=".LoginPage"/>
+        <activity android:name=".alphabetGame"></activity>
+        <activity android:name=".countGame" />
+        <activity android:name=".additionGame" />
+        <activity android:name=".homePage" />
+        <activity
+            android:name=".newAdmin"
+            android:parentActivityName=".accountCreation" />
+        <activity
+            android:name=".accountCreation"
+            android:parentActivityName=".LoginPage" />
+        <activity
+            android:name=".forgotPassword"
+            android:parentActivityName=".LoginPage" />
         <activity android:name=".LoginPage" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -24,7 +30,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
