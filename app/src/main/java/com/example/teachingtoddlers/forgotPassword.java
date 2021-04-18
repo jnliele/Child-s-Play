@@ -34,26 +34,26 @@ public class forgotPassword extends AppCompatActivity {
 
 
         submit = (Button) (findViewById(R.id.enterButton));
-        emailOfUser = (EditText)(findViewById(R.id.Email));
+        emailOfUser = findViewById(R.id.Email);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // restPassword();
                 // get email inputted
                 String email=emailOfUser.getText().toString().trim();
+
+                // ensure field is not empty
+                if(email.isEmpty()){
+                    emailOfUser.setError("Please Enter Your Email!");
+                    emailOfUser.requestFocus();
+                    return;
+                }
 
                 // validate email input
                 auth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
-                        if(email.isEmpty()){
-
-                            emailOfUser.setError("Please Enter Your Email!");
-                            emailOfUser.requestFocus();
-                            return;
-                        }
                         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                             emailOfUser.setError("Please Enter Valid Email");
                             emailOfUser.requestFocus();
