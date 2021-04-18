@@ -10,9 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TeachingToddlers">
         <activity android:name=".alphabetGame"></activity>
-        <activity android:name=".countGame" />
-        <activity android:name=".additionGame" />
-        <activity android:name=".homePage" />
+        <activity android:name=".countGame"/>
+        <activity android:name=".additionGame"/>
+        <activity android:name=".homePage"/>
         <activity
             android:name=".newAdmin"
             android:parentActivityName=".accountCreation" />
