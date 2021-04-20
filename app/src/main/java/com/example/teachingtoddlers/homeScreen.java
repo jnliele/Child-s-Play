@@ -24,7 +24,7 @@ public class homeScreen extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public Button logout,launchAddGame,launchCountGame,launchABCGame;
+    public Button launchAddGame,launchCountGame,launchABCGame;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -67,25 +67,10 @@ public class homeScreen extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_home_screen, container, false);
 
-        // functionality for logout button
-        logout = (Button) (view.findViewById(R.id.UserLogsOut));
+        // functionality for game buttons
         launchAddGame = (Button) (view.findViewById(R.id.additionButton));
         launchABCGame = (Button) (view.findViewById(R.id.AlphaButton));
         launchCountGame = (Button) (view.findViewById(R.id.countButton));
-
-        logout.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                FirebaseAuth.getInstance().signOut();
-                Intent home = new Intent(getActivity(), LoginPage.class);
-                startActivity(home);
-                getActivity().finish();
-            }
-        }
-            );
-
 
         launchAddGame.setOnClickListener(new View.OnClickListener()
         {

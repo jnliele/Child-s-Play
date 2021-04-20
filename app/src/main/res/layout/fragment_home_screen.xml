@@ -245,17 +245,6 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/UserLogsOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/addition"
-                android:text="Logout"
-                app:backgroundTint="@color/red" />
-
 
         </LinearLayout>
     </ScrollView>

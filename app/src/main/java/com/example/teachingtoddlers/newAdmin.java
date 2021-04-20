@@ -105,8 +105,7 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
 
         // create a unique name for photo to be uploaded in database
         final String randomKey = UUID.randomUUID().toString();
-        StorageReference riversRef = storageRef.child("images/" + randomKey);
-        image = "images/" + randomKey;
+        StorageReference riversRef = storageRef.child(randomKey);
 
         // attempt to upload the picture to database
         // two different cases: success and failure
@@ -117,6 +116,13 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot){
                         pd.dismiss();
                         Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
+                        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Uri downloadUrl = uri;
+                                image = downloadUrl.toString();
+                            }
+                        });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener(){
