@@ -29,11 +29,8 @@ public class LoginPage extends AppCompatActivity {
     Button SignInButton;
     ProgressDialog progressDialog;
     private TextView register;
-    private EditText emailUsername, firstName, lastName, UTAID, password, profession;
+    private EditText emailUsername, password;
     private FirebaseAuth auth;
-    public Uri imageUri;
-    private StorageReference storageReference;
-    public static final String EXTRA_EMAIL = "com.example.teachingtoddlers.EXTRA_EMAIL";
 
 
 
@@ -117,7 +114,6 @@ public class LoginPage extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 Toast.makeText(LoginPage.this, "You have successfully logged in!", Toast.LENGTH_SHORT).show();
                                  Intent home= new Intent(LoginPage.this, homePage.class);
-                                 home.putExtra(EXTRA_EMAIL, email);
                                  startActivity(home);
                             }else{
                                 Toast.makeText(LoginPage.this, "Sign in failed!", Toast.LENGTH_LONG).show();
