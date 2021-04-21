@@ -123,9 +123,9 @@ public class ChildProfileFragment extends Fragment {
                         alphabetLevelTwoTotalPlay = ds.child("alphabetLevelTwoTotalPlay").getValue(Long.class);
                         alphabetLevelThreeTotalPlay = ds.child("alphabetLevelThreeTotalPlay").getValue(Long.class);
 
-                        countingLevelOneTotalPlay = ds.child("additionLevelOneTotalPlay").getValue(Long.class);
-                        countingLevelTwoTotalPlay = ds.child("additionLevelTwoTotalPlay").getValue(Long.class);
-                        countingLevelThreeTotalPlay = ds.child("additionLevelThreeTotalPlay").getValue(Long.class);
+                        countingLevelOneTotalPlay = ds.child("countingLevelOneTotalPlay").getValue(Long.class);
+                        countingLevelTwoTotalPlay = ds.child("countingLevelTwoTotalPlay").getValue(Long.class);
+                        countingLevelThreeTotalPlay = ds.child("countingLevelThreeTotalPlay").getValue(Long.class);
 
                         additionLevelOneTotalPlay = ds.child("additionLevelOneTotalPlay").getValue(Long.class);
                         additionLevelTwoTotalPlay = ds.child("additionLevelTwoTotalPlay").getValue(Long.class);
@@ -135,9 +135,9 @@ public class ChildProfileFragment extends Fragment {
                         alphabetLevelTwoCorrect = ds.child("alphabetLevelTwoCorrect").getValue(Long.class);
                         alphabetLevelThreeCorrect = ds.child("alphabetLevelThreeCorrect").getValue(Long.class);
 
-                        countingLevelOneCorrect = ds.child("additionLevelOneCorrect").getValue(Long.class);
-                        countingLevelTwoCorrect = ds.child("additionLevelTwoCorrect").getValue(Long.class);
-                        countingLevelThreeCorrect = ds.child("additionLevelThreeCorrect").getValue(Long.class);
+                        countingLevelOneCorrect = ds.child("countingLevelOneCorrect").getValue(Long.class);
+                        countingLevelTwoCorrect = ds.child("countingLevelTwoCorrect").getValue(Long.class);
+                        countingLevelThreeCorrect = ds.child("countingLevelThreeCorrect").getValue(Long.class);
 
                         additionLevelOneCorrect = ds.child("additionLevelOneCorrect").getValue(Long.class);
                         additionLevelTwoCorrect = ds.child("additionLevelTwoCorrect").getValue(Long.class);
@@ -147,13 +147,77 @@ public class ChildProfileFragment extends Fragment {
                         alphabetLevelTwoTotal = ds.child("alphabetLevelTwoTotal").getValue(Long.class);
                         alphabetLevelThreeTotal = ds.child("alphabetLevelThreeTotal").getValue(Long.class);
 
-                        countingLevelOneTotal = ds.child("additionLevelOneTotal").getValue(Long.class);
-                        countingLevelTwoTotal = ds.child("additionLevelTwoTotal").getValue(Long.class);
-                        countingLevelThreeTotal = ds.child("additionLevelThreeTotal").getValue(Long.class);
+                        countingLevelOneTotal = ds.child("countingLevelOneTotal").getValue(Long.class);
+                        countingLevelTwoTotal = ds.child("countingLevelTwoTotal").getValue(Long.class);
+                        countingLevelThreeTotal = ds.child("countingLevelThreeTotal").getValue(Long.class);
 
                         additionLevelOneTotal = ds.child("additionLevelOneTotal").getValue(Long.class);
                         additionLevelTwoTotal = ds.child("additionLevelTwoTotal").getValue(Long.class);
                         additionLevelThreeTotal = ds.child("additionLevelThreeTotal").getValue(Long.class);
+
+                        // update alphabet progress bar
+                        long alphabetTotalCorrect = alphabetLevelOneCorrect + alphabetLevelTwoCorrect + alphabetLevelThreeCorrect;
+                        long alphabetTotalQues = alphabetLevelOneTotal + alphabetLevelTwoTotal + alphabetLevelThreeTotal;
+                        if (alphabetTotalCorrect == 0 || alphabetTotalQues == 0)
+                        {
+                            LessonOnePerc.setText(" 0%");
+                        }
+                        else // division is valid
+                        {
+                            long percentage = (long)((float)100*alphabetTotalCorrect/alphabetTotalQues);
+                            if (percentage<10) // add space in for single digits to center it
+                            {
+                                LessonOnePerc.setText(" " + String.valueOf(percentage) + "%");
+                            }
+                            else
+                            {
+                                LessonOnePerc.setText(String.valueOf(percentage) + "%");
+                            }
+                            alphabet.setProgress((int)percentage);
+                        }
+
+                        // update counting progress bar
+                        long countingTotalCorrect = countingLevelOneCorrect + countingLevelTwoCorrect + countingLevelThreeCorrect;
+                        long countingTotalQues = countingLevelOneTotal + countingLevelTwoTotal + countingLevelThreeTotal;
+
+                        if (countingTotalCorrect == 0 || countingTotalQues == 0)
+                        {
+                            LessonTwoPerc.setText(" 0%");
+                        }
+                        else // division is valid
+                        {
+                            long percentage = (long)((float)100*countingTotalCorrect/countingTotalQues);
+                            if (percentage<10) // add space in for single digits to center it
+                            {
+                                LessonTwoPerc.setText(" " + String.valueOf(percentage) + "%");
+                            }
+                            else
+                            {
+                                LessonTwoPerc.setText(String.valueOf(percentage) + "%");
+                            }
+                            counting.setProgress((int)percentage);
+                        }
+
+                        // update addition progress bar
+                        long additionTotalCorrect = additionLevelOneCorrect + additionLevelTwoCorrect + additionLevelThreeCorrect;
+                        long additionTotalQues = additionLevelOneTotal + additionLevelTwoTotal + additionLevelThreeTotal;
+                        if (additionTotalCorrect == 0 || additionTotalQues == 0)
+                        {
+                            LessonThreePerc.setText(" 0%");
+                        }
+                        else // division is valid
+                        {
+                            long percentage = (long)((float)100*additionTotalCorrect/additionTotalQues);
+                            if (percentage<10) // add space in for single digits to center it
+                            {
+                                LessonThreePerc.setText(" " + String.valueOf(percentage) + "%");
+                            }
+                            else
+                            {
+                                LessonThreePerc.setText(String.valueOf(percentage) + "%");
+                            }
+                            addition.setProgress((int)percentage);
+                        }
                     }
                 }
             }
@@ -163,73 +227,6 @@ public class ChildProfileFragment extends Fragment {
 
             }
         });
-
-        // update alphabet progress bar
-        long alphabetTotalCorrect = alphabetLevelOneCorrect + alphabetLevelTwoCorrect + alphabetLevelThreeCorrect;
-        long alphabetTotalQues = alphabetLevelOneTotal + alphabetLevelTwoTotal + alphabetLevelThreeTotal;
-        if (alphabetTotalCorrect == Long.valueOf(0) || alphabetTotalQues == Long.valueOf(0))
-        {
-            LessonOnePerc.setText(" 0%");
-        }
-        else // division is valid
-        {
-            long percentage = alphabetTotalCorrect/alphabetTotalQues;
-            if (percentage<10) // add space in for single digits to center it
-            {
-                LessonOnePerc.setText(" " + String.valueOf(percentage) + "%");
-            }
-            else
-            {
-                LessonOnePerc.setText(String.valueOf(percentage) + "%");
-            }
-            alphabet.setProgress((int)percentage);
-        }
-
-        // update counting progress bar
-        LessonOnePerc.setText(String.valueOf(countingLevelOneCorrect));
-        LessonTwoPerc.setText(String.valueOf(countingLevelTwoCorrect));
-        LessonThreePerc.setText(String.valueOf(countingLevelThreeCorrect));
-        long countingTotalCorrect = countingLevelOneCorrect + countingLevelTwoCorrect + countingLevelThreeCorrect;
-        long countingTotalQues = countingLevelOneTotal + countingLevelTwoTotal + countingLevelThreeTotal;
-        /*
-        if (countingTotalCorrect == Long.valueOf(0) || countingTotalQues == Long.valueOf(0))
-        {
-            LessonTwoPerc.setText(" 0%");
-        }
-        else // division is valid
-        {
-            long percentage = countingTotalCorrect/countingTotalQues;
-            if (percentage<10) // add space in for single digits to center it
-            {
-                LessonTwoPerc.setText(" " + String.valueOf(percentage) + "%");
-            }
-            else
-            {
-                LessonTwoPerc.setText(String.valueOf(percentage) + "%");
-            }
-            counting.setProgress((int)percentage);
-        }
-
-        // update addition progress bar
-        long additionTotalCorrect = additionLevelOneCorrect + additionLevelTwoCorrect + additionLevelThreeCorrect;
-        long additionTotalQues = additionLevelOneTotal + additionLevelTwoTotal + additionLevelThreeTotal;
-        if (additionTotalCorrect == Long.valueOf(0) || additionTotalQues == Long.valueOf(0))
-        {
-            LessonThreePerc.setText(" 0%");
-        }
-        else // division is valid
-        {
-            long percentage = additionTotalCorrect/additionTotalQues;
-            if (percentage<10) // add space in for single digits to center it
-            {
-                LessonThreePerc.setText(" " + String.valueOf(percentage) + "%");
-            }
-            else
-            {
-                LessonThreePerc.setText(String.valueOf(percentage) + "%");
-            }
-            addition.setProgress((int)percentage);
-        }*/
 
         return view;
     }
