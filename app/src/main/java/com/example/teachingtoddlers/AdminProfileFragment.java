@@ -104,7 +104,7 @@ public class AdminProfileFragment extends Fragment {
                         utaID.setText(ds.child("utaID").getValue(String.class));
                         email.setText(ds.child("email").getValue(String.class));
                         String image = ds.child("image").getValue(String.class);
-                        if (!image.isEmpty())
+                        if (!image.equals("empty"))
                         {
                             Picasso.with(getActivity()).load(image).into(imageview);
                         }

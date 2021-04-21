@@ -50,6 +50,7 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_admin);
 
+        image = "empty";
         auth = FirebaseAuth.getInstance();
 
         // get id for register button and enable an action
