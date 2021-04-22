@@ -191,19 +191,17 @@ public class ChildProfileFragment extends Fragment {
                         // update alphabet progress bar
                         long alphabetTotalCorrect = alphabetLevelOneCorrect + alphabetLevelTwoCorrect + alphabetLevelThreeCorrect;
                         long alphabetTotalQues = alphabetLevelOneTotal + alphabetLevelTwoTotal + alphabetLevelThreeTotal;
-                        if (alphabetTotalCorrect == 0 || alphabetTotalQues == 0)
-                        {
+                        if (alphabetTotalCorrect == 0 || alphabetTotalQues == 0) {
                             LessonOnePerc.setText(" 0%");
                         }
-                        else // division is valid
-                        {
+                        // division is valid
+                        else {
                             long percentage = (long)((float)100*alphabetTotalCorrect/alphabetTotalQues);
-                            if (percentage<10) // add space in for single digits to center it
-                            {
+                            // add space in for single digits to center it
+                            if (percentage<10) {
                                 LessonOnePerc.setText(" " + String.valueOf(percentage) + "%");
                             }
-                            else
-                            {
+                            else {
                                 LessonOnePerc.setText(String.valueOf(percentage) + "%");
                             }
                             alphabet.setProgress((int)percentage);
@@ -213,19 +211,17 @@ public class ChildProfileFragment extends Fragment {
                         long countingTotalCorrect = countingLevelOneCorrect + countingLevelTwoCorrect + countingLevelThreeCorrect;
                         long countingTotalQues = countingLevelOneTotal + countingLevelTwoTotal + countingLevelThreeTotal;
 
-                        if (countingTotalCorrect == 0 || countingTotalQues == 0)
-                        {
+                        if (countingTotalCorrect == 0 || countingTotalQues == 0) {
                             LessonTwoPerc.setText(" 0%");
                         }
-                        else // division is valid
-                        {
+                        // division is valid
+                        else {
                             long percentage = (long)((float)100*countingTotalCorrect/countingTotalQues);
-                            if (percentage<10) // add space in for single digits to center it
-                            {
+                            // add space in for single digits to center it
+                            if (percentage<10) {
                                 LessonTwoPerc.setText(" " + String.valueOf(percentage) + "%");
                             }
-                            else
-                            {
+                            else {
                                 LessonTwoPerc.setText(String.valueOf(percentage) + "%");
                             }
                             counting.setProgress((int)percentage);
@@ -234,19 +230,17 @@ public class ChildProfileFragment extends Fragment {
                         // update addition progress bar
                         long additionTotalCorrect = additionLevelOneCorrect + additionLevelTwoCorrect + additionLevelThreeCorrect;
                         long additionTotalQues = additionLevelOneTotal + additionLevelTwoTotal + additionLevelThreeTotal;
-                        if (additionTotalCorrect == 0 || additionTotalQues == 0)
-                        {
+                        if (additionTotalCorrect == 0 || additionTotalQues == 0) {
                             LessonThreePerc.setText(" 0%");
                         }
-                        else // division is valid
-                        {
+                        // division is valid
+                        else {
                             long percentage = (long)((float)100*additionTotalCorrect/additionTotalQues);
-                            if (percentage<10) // add space in for single digits to center it
-                            {
+                            // add space in for single digits to center it
+                            if (percentage<10) {
                                 LessonThreePerc.setText(" " + String.valueOf(percentage) + "%");
                             }
-                            else
-                            {
+                            else {
                                 LessonThreePerc.setText(String.valueOf(percentage) + "%");
                             }
                             addition.setProgress((int)percentage);
@@ -266,125 +260,124 @@ public class ChildProfileFragment extends Fragment {
                         long addLvlThree = (long)((float)100*additionLevelThreeCorrect/additionLevelThreeTotal);
 
                         // determine whether a level is the child's strength or weakness
-                        if (alphLvlOne>=70) // passing grade
-                        {
+                        // passing grade
+                        if (alphLvlOne>=70) {
                             strengthTopicList.add("Letters A-H");
                             strengthAccuracyList.add(alphLvlOne);
                             strengthPlayCountList.add(alphabetLevelOneTotalPlay);
                         }
-                        else // failing grade
-                        {
+                        // failing grade
+                        else {
                             weakTopicList.add("Letters A-H");
                             weakAccuracyList.add(alphLvlOne);
                             weakPlayCountList.add(alphabetLevelOneTotalPlay);
                         }
-                        if (alphLvlTwo>=70) // passing grade
-                        {
+                        // passing grade
+                        if (alphLvlTwo>=70) {
                             strengthTopicList.add("Letters A-P");
                             strengthAccuracyList.add(alphLvlTwo);
                             strengthPlayCountList.add(alphabetLevelTwoTotalPlay);
                         }
-                        else // failing grade
-                        {
+                        // failing grade
+                        else {
                             weakTopicList.add("Letters A-P");
                             weakAccuracyList.add(alphLvlTwo);
                             weakPlayCountList.add(alphabetLevelTwoTotalPlay);
                         }
-                        if (alphLvlThree>=70) // passing grade
-                        {
+                        // passing grade
+                        if (alphLvlThree>=70) {
                             strengthTopicList.add("Letters A-Z");
                             strengthAccuracyList.add(alphLvlThree);
                             strengthPlayCountList.add(alphabetLevelThreeTotalPlay);
                         }
-                        else // failing grade
-                        {
+                        // failing grade
+                        else {
                             weakTopicList.add("Letters A-Z");
                             weakAccuracyList.add(alphLvlThree);
                             weakPlayCountList.add(alphabetLevelThreeTotalPlay);
                         }
-                        if (countLvlOne>=70) // passing grade
-                        {
+                        // passing grade
+                        if (countLvlOne>=70) {
                             strengthTopicList.add("Count Numbers 0-5");
                             strengthAccuracyList.add(countLvlOne);
                             strengthPlayCountList.add(countingLevelOneTotalPlay);
                         }
-                        else // failing grade
-                        {
+                        // failing grade
+                        else {
                             weakTopicList.add("Count Numbers 0-5");
                             weakAccuracyList.add(countLvlOne);
                             weakPlayCountList.add(countingLevelOneTotalPlay);
                         }
-                        if (countLvlTwo>=70) // passing grade
-                        {
+                        // passing grade
+                        if (countLvlTwo>=70) {
                             strengthTopicList.add("Count Numbers 0-10");
                             strengthAccuracyList.add(countLvlTwo);
                             strengthPlayCountList.add(countingLevelTwoTotalPlay);
                         }
-                        else // failing grade
-                        {
+                        // failing grade
+                        else {
                             weakTopicList.add("Count Numbers 0-10");
                             weakAccuracyList.add(countLvlTwo);
                             weakPlayCountList.add(countingLevelTwoTotalPlay);
                         }
-                        if (countLvlThree>=70) // passing grade
-                        {
+                        // passing grade
+                        if (countLvlThree>=70) {
                             strengthTopicList.add("Count Numbers 0-20");
                             strengthAccuracyList.add(countLvlThree);
                             strengthPlayCountList.add(countingLevelThreeTotalPlay);
                         }
-                        else // failing grade
-                        {
+                        // failing grade
+                        else {
                             weakTopicList.add("Count Numbers 0-20");
                             weakAccuracyList.add(countLvlThree);
                             weakPlayCountList.add(countingLevelThreeTotalPlay);
                         }
-                        if (addLvlOne>=70) // passing grade
-                        {
+                        // passing grade
+                        if (addLvlOne>=70) {
                             strengthTopicList.add("Add with Single Digits");
                             strengthAccuracyList.add(addLvlOne);
                             strengthPlayCountList.add(additionLevelOneTotalPlay);
                         }
-                        else // failing grade
-                        {
+                        // failing grade
+                        else {
                             weakTopicList.add("Add with Single Digits");
                             weakAccuracyList.add(addLvlOne);
                             weakPlayCountList.add(additionLevelOneTotalPlay);
                         }
-                        if (addLvlTwo>=70) // passing grade
-                        {
+                        // passing grade
+                        if (addLvlTwo>=70) {
                             strengthTopicList.add("Add with Double Digits");
                             strengthAccuracyList.add(addLvlTwo);
                             strengthPlayCountList.add(additionLevelTwoTotalPlay);
                         }
-                        else // failing grade
-                        {
+                        // failing grade
+                        else {
                             weakTopicList.add("Add with Double Digits");
                             weakAccuracyList.add(addLvlTwo);
                             weakPlayCountList.add(additionLevelTwoTotalPlay);
                         }
-                        if (addLvlThree>=70) // passing grade
-                        {
+                        // passing grade
+                        if (addLvlThree>=70) {
                             strengthTopicList.add("Add with Triple Digits");
                             strengthAccuracyList.add(addLvlThree);
                             strengthPlayCountList.add(additionLevelThreeTotalPlay);
                         }
-                        else // failing grade
-                        {
+                        // failing grade
+                        else {
                             weakTopicList.add("Add with Triple Digits");
                             weakAccuracyList.add(addLvlThree);
                             weakPlayCountList.add(additionLevelThreeTotalPlay);
                         }
 
                         // make sure strengths list isn't empty
-                        if (strengthTopicList.isEmpty())
-                        {
+                        if (strengthTopicList.isEmpty()) {
                             strengthTopicList.add("-");
                             strengthAccuracyList.add(Long.valueOf(-1));
                             strengthPlayCountList.add(Long.valueOf(-1));
                         }
 
-                        if (getActivity()!=null) // only update recycler if on child profile
-                        {
+                        // only update recycler if on child profile
+                        if (getActivity()!=null) {
                             // set up the adapter for recycler view to display strengths
                             recyclerAdapter adapter = new recyclerAdapter(strengthTopicList, strengthAccuracyList, strengthPlayCountList);
                             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -412,27 +405,21 @@ public class ChildProfileFragment extends Fragment {
 
                         // determine the max total play count among the lessons
                         long max = faveTotalPlayList.get(0); // make the first lesson the max
-                        for (int i = 1; i<faveTotalPlayList.size(); i++)
-                        {
-                            if (faveTotalPlayList.get(i) > max)
-                            {
+                        for (int i = 1; i<faveTotalPlayList.size(); i++) {
+                            if (faveTotalPlayList.get(i) > max) {
                                 max = faveTotalPlayList.get(i);
                             }
                         }
 
                         // ensure the max is not 0
-                        if (max == 0)
-                        {
+                        if (max == 0) {
                             faveList.clear();
                             faveList.add("None");
                         }
-                        else
-                        {
+                        else {
                             // remove all lessons that do not have max total play count;
-                            for (int i = 0; i<faveTotalPlayList.size(); i++)
-                            {
-                                if (faveTotalPlayList.get(i) != max)
-                                {
+                            for (int i = 0; i<faveTotalPlayList.size(); i++) {
+                                if (faveTotalPlayList.get(i) != max) {
                                     faveTotalPlayList.remove(i);
                                     faveList.remove(i);
                                     i--;
@@ -442,13 +429,12 @@ public class ChildProfileFragment extends Fragment {
 
                         // to handle different recyclerAdapter xml in recyclerAdapter.java
                         faveTotalPlayList.clear();
-                        for (int i = 0; i<faveList.size(); i++)
-                        {
+                        for (int i = 0; i<faveList.size(); i++) {
                             faveTotalPlayList.add(Long.valueOf(-2));
                         }
 
-                        if (getActivity()!=null) // only update recycler if on child profile
-                        {
+                        // only update recycler if on child profile
+                        if (getActivity()!=null) {
                             // set up the adapter for recycler view to display favorite lesson
                             recyclerAdapter adapterFave = new recyclerAdapter(faveList, faveTotalPlayList, faveTotalPlayList);
                             RecyclerView.LayoutManager layoutManagerFave = new LinearLayoutManager(getActivity().getApplicationContext());

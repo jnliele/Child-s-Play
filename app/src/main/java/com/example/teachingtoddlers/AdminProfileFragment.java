@@ -91,6 +91,7 @@ public class AdminProfileFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference(USERS);
 
+        // get email that is logged in
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         // find the account user is signed in and update correct information for admin profile
