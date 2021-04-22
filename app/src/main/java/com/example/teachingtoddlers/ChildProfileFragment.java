@@ -111,6 +111,7 @@ public class ChildProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_child_profile, container, false);
 
@@ -382,19 +383,22 @@ public class ChildProfileFragment extends Fragment {
                             strengthPlayCountList.add(Long.valueOf(-1));
                         }
 
-                        // set up the adapter for recycler view to display strengths
-                        recyclerAdapter adapter = new recyclerAdapter(strengthTopicList, strengthAccuracyList, strengthPlayCountList);
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-                        recyclerView.setLayoutManager(layoutManager);
-                        recyclerView.setItemAnimator(new DefaultItemAnimator());
-                        recyclerView.setAdapter(adapter);
+                        if (getActivity()!=null) // only update recycler if on child profile
+                        {
+                            // set up the adapter for recycler view to display strengths
+                            recyclerAdapter adapter = new recyclerAdapter(strengthTopicList, strengthAccuracyList, strengthPlayCountList);
+                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+                            recyclerView.setLayoutManager(layoutManager);
+                            recyclerView.setItemAnimator(new DefaultItemAnimator());
+                            recyclerView.setAdapter(adapter);
 
-                        // set up the adapter for recycler view to display weaknesses
-                        recyclerAdapter adapterWeak = new recyclerAdapter(weakTopicList, weakAccuracyList, weakPlayCountList);
-                        RecyclerView.LayoutManager layoutManagerWeak = new LinearLayoutManager(getActivity().getApplicationContext());
-                        recyclerViewWeak.setLayoutManager(layoutManagerWeak);
-                        recyclerViewWeak.setItemAnimator(new DefaultItemAnimator());
-                        recyclerViewWeak.setAdapter(adapterWeak);
+                            // set up the adapter for recycler view to display weaknesses
+                            recyclerAdapter adapterWeak = new recyclerAdapter(weakTopicList, weakAccuracyList, weakPlayCountList);
+                            RecyclerView.LayoutManager layoutManagerWeak = new LinearLayoutManager(getActivity().getApplicationContext());
+                            recyclerViewWeak.setLayoutManager(layoutManagerWeak);
+                            recyclerViewWeak.setItemAnimator(new DefaultItemAnimator());
+                            recyclerViewWeak.setAdapter(adapterWeak);
+                        }
 
                         // populate list of lessons
                         faveList.add("Alphabet");
@@ -443,12 +447,15 @@ public class ChildProfileFragment extends Fragment {
                             faveTotalPlayList.add(Long.valueOf(-2));
                         }
 
-                        // set up the adapter for recycler view to display favorite lesson
-                        recyclerAdapter adapterFave = new recyclerAdapter(faveList, faveTotalPlayList, faveTotalPlayList);
-                        RecyclerView.LayoutManager layoutManagerFave = new LinearLayoutManager(getActivity().getApplicationContext());
-                        recyclerViewFave.setLayoutManager(layoutManagerFave);
-                        recyclerViewFave.setItemAnimator(new DefaultItemAnimator());
-                        recyclerViewFave.setAdapter(adapterFave);
+                        if (getActivity()!=null) // only update recycler if on child profile
+                        {
+                            // set up the adapter for recycler view to display favorite lesson
+                            recyclerAdapter adapterFave = new recyclerAdapter(faveList, faveTotalPlayList, faveTotalPlayList);
+                            RecyclerView.LayoutManager layoutManagerFave = new LinearLayoutManager(getActivity().getApplicationContext());
+                            recyclerViewFave.setLayoutManager(layoutManagerFave);
+                            recyclerViewFave.setItemAnimator(new DefaultItemAnimator());
+                            recyclerViewFave.setAdapter(adapterFave);
+                        }
                     }
                 }
             }
