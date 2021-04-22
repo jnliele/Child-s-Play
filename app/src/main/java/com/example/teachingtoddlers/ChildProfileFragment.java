@@ -4,6 +4,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +53,17 @@ public class ChildProfileFragment extends Fragment {
     long alphabetLevelOneTotal, alphabetLevelTwoTotal, alphabetLevelThreeTotal;
     long countingLevelOneTotal, countingLevelTwoTotal, countingLevelThreeTotal;
     long additionLevelOneTotal, additionLevelTwoTotal, additionLevelThreeTotal;
+
+    // array lists to hold stats
+    private ArrayList<String> strengthTopicList;
+    private ArrayList<Long> strengthAccuracyList;
+    private ArrayList<Long> strengthPlayCountList;
+    private ArrayList<String> weakTopicList;
+    private ArrayList<Long> weakAccuracyList;
+    private ArrayList<Long> weakPlayCountList;
+
+    private RecyclerView recyclerView;
+    private RecyclerView recyclerViewWeak;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -104,6 +120,16 @@ public class ChildProfileFragment extends Fragment {
         counting = (ProgressBar) view.findViewById(R.id.LessonTwoProg);
         LessonThreePerc = (TextView) view.findViewById(R.id.LessonThreePerc);
         addition = (ProgressBar) view.findViewById(R.id.LessonThreeProg);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerViewWeak = (RecyclerView) view.findViewById(R.id.recyclerViewWeakness);
+
+        // create array lists
+        strengthTopicList = new ArrayList<>();
+        strengthAccuracyList = new ArrayList<>();
+        strengthPlayCountList = new ArrayList<>();
+        weakTopicList = new ArrayList<>();
+        weakAccuracyList = new ArrayList<>();
+        weakPlayCountList = new ArrayList<>();
 
         // get an instance of user reference from database
         database = FirebaseDatabase.getInstance();
@@ -218,6 +244,151 @@ public class ChildProfileFragment extends Fragment {
                             }
                             addition.setProgress((int)percentage);
                         }
+
+                        // calculate child's grade for each level
+                        long alphLvlOne = (long)((float)100*alphabetLevelOneCorrect/alphabetLevelOneTotal);
+                        long alphLvlTwo = (long)((float)100*alphabetLevelTwoCorrect/alphabetLevelTwoTotal);
+                        long alphLvlThree = (long)((float)100*alphabetLevelThreeCorrect/alphabetLevelThreeTotal);
+
+                        long countLvlOne = (long)((float)100*countingLevelOneCorrect/countingLevelOneTotal);
+                        long countLvlTwo = (long)((float)100*countingLevelTwoCorrect/countingLevelTwoTotal);
+                        long countLvlThree = (long)((float)100*countingLevelThreeCorrect/countingLevelThreeTotal);
+
+                        long addLvlOne = (long)((float)100*additionLevelOneCorrect/additionLevelOneTotal);
+                        long addLvlTwo = (long)((float)100*additionLevelTwoCorrect/additionLevelTwoTotal);
+                        long addLvlThree = (long)((float)100*additionLevelThreeCorrect/additionLevelThreeTotal);
+
+                        // determine whether a level is the child's strength or weakness
+                        if (alphLvlOne>=70) // passing grade
+                        {
+                            strengthTopicList.add("Letters A-H");
+                            strengthAccuracyList.add(alphLvlOne);
+                            strengthPlayCountList.add(alphabetLevelOneTotalPlay);
+                        }
+                        else // failing grade
+                        {
+                            weakTopicList.add("Letters A-H");
+                            weakAccuracyList.add(alphLvlOne);
+                            weakPlayCountList.add(alphabetLevelOneTotalPlay);
+                        }
+                        if (alphLvlTwo>=70) // passing grade
+                        {
+                            strengthTopicList.add("Letters A-P");
+                            strengthAccuracyList.add(alphLvlTwo);
+                            strengthPlayCountList.add(alphabetLevelTwoTotalPlay);
+                        }
+                        else // failing grade
+                        {
+                            weakTopicList.add("Letters A-P");
+                            weakAccuracyList.add(alphLvlTwo);
+                            weakPlayCountList.add(alphabetLevelTwoTotalPlay);
+                        }
+                        if (alphLvlThree>=70) // passing grade
+                        {
+                            strengthTopicList.add("Letters A-Z");
+                            strengthAccuracyList.add(alphLvlThree);
+                            strengthPlayCountList.add(alphabetLevelThreeTotalPlay);
+                        }
+                        else // failing grade
+                        {
+                            weakTopicList.add("Letters A-Z");
+                            weakAccuracyList.add(alphLvlThree);
+                            weakPlayCountList.add(alphabetLevelThreeTotalPlay);
+                        }
+                        if (countLvlOne>=70) // passing grade
+                        {
+                            strengthTopicList.add("Count Numbers 0-5");
+                            strengthAccuracyList.add(countLvlOne);
+                            strengthPlayCountList.add(countingLevelOneTotalPlay);
+                        }
+                        else // failing grade
+                        {
+                            weakTopicList.add("Count Numbers 0-5");
+                            weakAccuracyList.add(countLvlOne);
+                            weakPlayCountList.add(countingLevelOneTotalPlay);
+                        }
+                        if (countLvlTwo>=70) // passing grade
+                        {
+                            strengthTopicList.add("Count Numbers 0-10");
+                            strengthAccuracyList.add(countLvlTwo);
+                            strengthPlayCountList.add(countingLevelTwoTotalPlay);
+                        }
+                        else // failing grade
+                        {
+                            weakTopicList.add("Count Numbers 0-10");
+                            weakAccuracyList.add(countLvlTwo);
+                            weakPlayCountList.add(countingLevelTwoTotalPlay);
+                        }
+                        if (countLvlThree>=70) // passing grade
+                        {
+                            strengthTopicList.add("Count Numbers 0-20");
+                            strengthAccuracyList.add(countLvlThree);
+                            strengthPlayCountList.add(countingLevelThreeTotalPlay);
+                        }
+                        else // failing grade
+                        {
+                            weakTopicList.add("Count Numbers 0-20");
+                            weakAccuracyList.add(countLvlThree);
+                            weakPlayCountList.add(countingLevelThreeTotalPlay);
+                        }
+                        if (addLvlOne>=70) // passing grade
+                        {
+                            strengthTopicList.add("Add with Single Digits");
+                            strengthAccuracyList.add(addLvlOne);
+                            strengthPlayCountList.add(additionLevelOneTotalPlay);
+                        }
+                        else // failing grade
+                        {
+                            weakTopicList.add("Add with Single Digits");
+                            weakAccuracyList.add(addLvlOne);
+                            weakPlayCountList.add(additionLevelOneTotalPlay);
+                        }
+                        if (addLvlTwo>=70) // passing grade
+                        {
+                            strengthTopicList.add("Add with Double Digits");
+                            strengthAccuracyList.add(addLvlTwo);
+                            strengthPlayCountList.add(additionLevelTwoTotalPlay);
+                        }
+                        else // failing grade
+                        {
+                            weakTopicList.add("Add with Double Digits");
+                            weakAccuracyList.add(addLvlTwo);
+                            weakPlayCountList.add(additionLevelTwoTotalPlay);
+                        }
+                        if (addLvlThree>=70) // passing grade
+                        {
+                            strengthTopicList.add("Add with Triple Digits");
+                            strengthAccuracyList.add(addLvlThree);
+                            strengthPlayCountList.add(additionLevelThreeTotalPlay);
+                        }
+                        else // failing grade
+                        {
+                            weakTopicList.add("Add with Triple Digits");
+                            weakAccuracyList.add(addLvlThree);
+                            weakPlayCountList.add(additionLevelThreeTotalPlay);
+                        }
+
+                        // make sure strengths list isn't empty
+                        if (strengthTopicList.isEmpty())
+                        {
+                            strengthTopicList.add("-");
+                            strengthAccuracyList.add(Long.valueOf(-1));
+                            strengthPlayCountList.add(Long.valueOf(-1));
+                        }
+
+                        // set up the adapter for recycler view strengths
+                        recyclerAdapter adapter = new recyclerAdapter(strengthTopicList, strengthAccuracyList, strengthPlayCountList);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        recyclerView.setAdapter(adapter);
+
+                        // set up the adapter for recycler view weaknesses
+                        recyclerAdapter adapterWeak = new recyclerAdapter(weakTopicList, weakAccuracyList, weakPlayCountList);
+                        RecyclerView.LayoutManager layoutManagerWeak = new LinearLayoutManager(getActivity().getApplicationContext());
+                        recyclerViewWeak.setLayoutManager(layoutManagerWeak);
+                        recyclerViewWeak.setItemAnimator(new DefaultItemAnimator());
+                        recyclerViewWeak.setAdapter(adapterWeak);
                     }
                 }
             }
