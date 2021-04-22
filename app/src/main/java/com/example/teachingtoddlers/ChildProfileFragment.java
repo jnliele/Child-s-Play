@@ -61,9 +61,12 @@ public class ChildProfileFragment extends Fragment {
     private ArrayList<String> weakTopicList;
     private ArrayList<Long> weakAccuracyList;
     private ArrayList<Long> weakPlayCountList;
+    private ArrayList<String> faveList;
+    private ArrayList<Long> faveTotalPlayList;
 
     private RecyclerView recyclerView;
     private RecyclerView recyclerViewWeak;
+    private RecyclerView recyclerViewFave;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -122,6 +125,7 @@ public class ChildProfileFragment extends Fragment {
         addition = (ProgressBar) view.findViewById(R.id.LessonThreeProg);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerViewWeak = (RecyclerView) view.findViewById(R.id.recyclerViewWeakness);
+        recyclerViewFave = (RecyclerView) view.findViewById(R.id.recyclerViewFaves);
 
         // create array lists
         strengthTopicList = new ArrayList<>();
@@ -130,6 +134,8 @@ public class ChildProfileFragment extends Fragment {
         weakTopicList = new ArrayList<>();
         weakAccuracyList = new ArrayList<>();
         weakPlayCountList = new ArrayList<>();
+        faveList = new ArrayList<>();
+        faveTotalPlayList = new ArrayList<>();
 
         // get an instance of user reference from database
         database = FirebaseDatabase.getInstance();
@@ -376,19 +382,73 @@ public class ChildProfileFragment extends Fragment {
                             strengthPlayCountList.add(Long.valueOf(-1));
                         }
 
-                        // set up the adapter for recycler view strengths
+                        // set up the adapter for recycler view to display strengths
                         recyclerAdapter adapter = new recyclerAdapter(strengthTopicList, strengthAccuracyList, strengthPlayCountList);
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
                         recyclerView.setLayoutManager(layoutManager);
                         recyclerView.setItemAnimator(new DefaultItemAnimator());
                         recyclerView.setAdapter(adapter);
 
-                        // set up the adapter for recycler view weaknesses
+                        // set up the adapter for recycler view to display weaknesses
                         recyclerAdapter adapterWeak = new recyclerAdapter(weakTopicList, weakAccuracyList, weakPlayCountList);
                         RecyclerView.LayoutManager layoutManagerWeak = new LinearLayoutManager(getActivity().getApplicationContext());
                         recyclerViewWeak.setLayoutManager(layoutManagerWeak);
                         recyclerViewWeak.setItemAnimator(new DefaultItemAnimator());
                         recyclerViewWeak.setAdapter(adapterWeak);
+
+                        // populate list of lessons
+                        faveList.add("Alphabet");
+                        faveList.add("Counting");
+                        faveList.add("Addition");
+
+                        // compute total play count for each lesson
+                        faveTotalPlayList.add(alphabetLevelOneTotalPlay+alphabetLevelTwoTotalPlay+alphabetLevelThreeTotalPlay);
+                        faveTotalPlayList.add(countingLevelOneTotalPlay+countingLevelTwoTotalPlay+countingLevelThreeTotalPlay);
+                        faveTotalPlayList.add(additionLevelOneTotalPlay+additionLevelTwoTotalPlay+additionLevelThreeTotalPlay);
+
+                        // determine the max total play count among the lessons
+                        long max = faveTotalPlayList.get(0); // make the first lesson the max
+                        for (int i = 1; i<faveTotalPlayList.size(); i++)
+                        {
+                            if (faveTotalPlayList.get(i) > max)
+                            {
+                                max = faveTotalPlayList.get(i);
+                            }
+                        }
+
+                        // ensure the max is not 0
+                        if (max == 0)
+                        {
+                            faveList.clear();
+                            faveList.add("None");
+                        }
+                        else
+                        {
+                            // remove all lessons that do not have max total play count;
+                            for (int i = 0; i<faveTotalPlayList.size(); i++)
+                            {
+                                if (faveTotalPlayList.get(i) != max)
+                                {
+                                    faveTotalPlayList.remove(i);
+                                    faveList.remove(i);
+                                    i--;
+                                }
+                            }
+                        }
+
+                        // to handle different recyclerAdapter xml in recyclerAdapter.java
+                        faveTotalPlayList.clear();
+                        for (int i = 0; i<faveList.size(); i++)
+                        {
+                            faveTotalPlayList.add(Long.valueOf(-2));
+                        }
+
+                        // set up the adapter for recycler view to display favorite lesson
+                        recyclerAdapter adapterFave = new recyclerAdapter(faveList, faveTotalPlayList, faveTotalPlayList);
+                        RecyclerView.LayoutManager layoutManagerFave = new LinearLayoutManager(getActivity().getApplicationContext());
+                        recyclerViewFave.setLayoutManager(layoutManagerFave);
+                        recyclerViewFave.setItemAnimator(new DefaultItemAnimator());
+                        recyclerViewFave.setAdapter(adapterFave);
                     }
                 }
             }

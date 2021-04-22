@@ -47,21 +47,29 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
     public void onBindViewHolder(@NonNull recyclerAdapter.MyViewHolder holder, int position) {
         // extract the values from array list
         String topicName = topicsList.get(position);
-        String accuracyString = String.valueOf(accuracyList.get(position)) + "%";
-        String playCountString = String.valueOf(playCountList.get(position));
+        long accuracy = accuracyList.get(position);
+        long playCount = playCountList.get(position);
 
         // set the extracted value into xml
-        if (topicName.equals("-")) // for when there is no valid data to display
+        if (topicName.equals("None"))
         {
-            holder.topicText.setText("   -");
-            holder.accuracyText.setText("-   ");
-            holder.playCountText.setText("-");
+            holder.topicText.setText("          None");
+        }
+        else if (accuracy == -2) // showing favorites list
+        {
+            holder.topicText.setText("      "+topicName);
+        }
+        else if (topicName.equals("-")) // for when there is no valid data to display
+        {
+            holder.topicText.setText("  --");
+            holder.accuracyText.setText("--   ");
+            holder.playCountText.setText("--");
         }
         else
         {
             holder.topicText.setText(topicName);
-            holder.accuracyText.setText(accuracyString);
-            holder.playCountText.setText(playCountString);
+            holder.accuracyText.setText(String.valueOf(accuracy)+"%");
+            holder.playCountText.setText(String.valueOf(playCount));
         }
     }
 
