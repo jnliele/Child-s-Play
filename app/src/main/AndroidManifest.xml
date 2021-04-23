@@ -14,6 +14,9 @@
         <activity android:name=".additionLevelThree"></activity>
         <activity android:name=".additionLevelTwo" />
         <activity android:name=".additionLevelOne" />
+        <activity android:name=".alphabetGameLvl3" />
+        <activity android:name=".alphabetGameLvl2" />
+        <activity android:name=".alphabetGameLvl1" />
         <activity android:name=".alphabetGame" />
         <activity android:name=".countGame" />
         <activity android:name=".additionGame" />
