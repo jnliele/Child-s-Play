@@ -6,6 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".additionLevelOne">
 
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:text="Start Game"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_backToLevels"
+        app:layout_constraintVertical_bias="0.324" />
+
+    <Button
+        android:id="@+id/btn_backToLevels"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:text="Game Levels"
+        android:visibility="invisible"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.206" />
+
     <TextView
         android:id="@+id/tv_score"
         android:layout_width="wrap_content"
@@ -116,10 +147,11 @@
         app:layout_constraintVertical_bias="0.656" />
 
     <Button
-        android:id="@+id/btn_start"
+        android:id="@+id/btn_nextLevel"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:text="Start"
+        android:layout_height="100dp"
+        android:text="Next Level"
+        android:visibility="invisible"
         android:textColor="@color/white"
         android:textSize="36sp"
         android:textStyle="bold"
@@ -128,6 +160,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/btn_start" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

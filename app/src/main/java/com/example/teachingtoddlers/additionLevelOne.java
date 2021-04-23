@@ -2,6 +2,7 @@ package com.example.teachingtoddlers;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -13,11 +14,10 @@ import android.widget.Toast;
 
 public class additionLevelOne extends AppCompatActivity {
 
-    Button btn_start, btn_answer0, btn_answer1,btn_answer2, btn_answer3;
+    Button btn_start, btn_answer0, btn_answer1,btn_answer2, btn_answer3,btn_nextLevel, btn_backToLevels;
     TextView tv_score, tv_questions, tv_timer, tv_bottomMessage;
     ProgressBar prog_timer;
     additonGameCode g = new additonGameCode();
-
     int secondsRemaining =30;
 
     CountDownTimer timer = new CountDownTimer(30000, 1000) {
@@ -45,7 +45,30 @@ public class additionLevelOne extends AppCompatActivity {
                 @Override
                 public void run() {
                     btn_start.setVisibility(View.VISIBLE);
+                    btn_backToLevels.setVisibility(View.VISIBLE);
+
+                   if(g.getNumberCorrect()>=10)
+                    btn_nextLevel.setVisibility(View.VISIBLE);
+
+                    btn_backToLevels.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(additionLevelOne.this, additionGame.class));
+                        }
+                    });
+
+
+                    btn_nextLevel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(additionLevelOne.this, additionLevelTwo.class));
+                        }
+                    });
+
+
                 }
+
+
             }, 4000);
 
 
@@ -54,11 +77,14 @@ public class additionLevelOne extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addition_level_one);
-
+        btn_backToLevels =findViewById(R.id.btn_backToLevels);
+        btn_nextLevel= findViewById(R.id.btn_nextLevel);
         btn_start = findViewById(R.id.btn_start);
         btn_answer0 = findViewById(R.id.btn_answer0);
         btn_answer1 = findViewById(R.id.btn_answer1);

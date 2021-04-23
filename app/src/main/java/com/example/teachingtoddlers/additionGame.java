@@ -12,12 +12,24 @@ import android.widget.TextView;
 
 public class additionGame extends AppCompatActivity {
     Button levelOneButton,levelTwoButton,levelThreeButton;
+    TextView goToHome;
     //additonGameCode g = new additonGameCode();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addition_game);
+
+
+
+        goToHome = (TextView) (findViewById(R.id.backToHome));
+
+        goToHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(additionGame.this, homePage.class));
+            }
+        });
 
 
         levelOneButton = (Button) (findViewById(R.id.levelOne));
