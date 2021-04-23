@@ -6,4 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".countGame">
 
+
+    <Button
+        android:id="@+id/Level1c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level One"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Level2c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level Two"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.655" />
+
+    <Button
+        android:id="@+id/Level3c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level Three"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.857" />
 </androidx.constraintlayout.widget.ConstraintLayout>
