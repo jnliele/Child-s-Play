@@ -1,146 +1,44 @@
 package com.example.teachingtoddlers;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Random;
-
-import org.w3c.dom.Text;
 
 public class alphabetGame extends AppCompatActivity {
 
-    alphabetQuestions questions = new alphabetQuestions();
-
-    Button Ans1, Ans2, Ans3, Ans4;
-    TextView Score, Question;
-
-    String answer;
-    int score = 0;
-    int questionNum = questions.questions.length;
-
-    Random r;
+    Button Lvl1, Lvl2, Lvl3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alphabet_game);
 
-        r = new Random();
+        Lvl1 = (Button) findViewById(R.id.Level1);
+        Lvl2 = (Button) findViewById(R.id.Level2);
+        Lvl3 = (Button) findViewById(R.id.Level3);
 
-        Ans1 = (Button) findViewById(R.id.Ans1);
-        Ans2 = (Button) findViewById(R.id.Ans2);
-        Ans3 = (Button) findViewById(R.id.Ans3);
-        Ans4 = (Button) findViewById(R.id.Ans4);
-
-        Question = (TextView) findViewById(R.id.Question);
-        Score = (TextView) findViewById(R.id.Score);
-        Score.setText("Score: " + score);
-
-        updateQuestion(r.nextInt(questionNum));
-
-        Ans1.setOnClickListener(new View.OnClickListener() {
+        Lvl1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Ans1.getText() == answer){
-                    score++;
-                    if(score == 10){
-                        gameEnd();
-                    }
-                    Score.setText("Score: " + score);
-                    updateQuestion(r.nextInt(questionNum));
-                    Toast.makeText(alphabetGame.this,"correct", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(alphabetGame.this,"wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion(r.nextInt(questionNum));
-                }
+                startActivity(new Intent(alphabetGame.this, alphabetGameLvl1.class));
             }
         });
 
-        Ans2.setOnClickListener(new View.OnClickListener() {
+        Lvl2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Ans2.getText() == answer){
-                    score++;
-                    if(score == 10){
-                        gameEnd();
-                    }
-                    Score.setText("Score: " + score);
-                    updateQuestion(r.nextInt(questionNum));
-                    Toast.makeText(alphabetGame.this,"correct", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(alphabetGame.this,"wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion(r.nextInt(questionNum));
-                }
+                startActivity(new Intent(alphabetGame.this, alphabetGameLvl2.class));
             }
         });
 
-        Ans3.setOnClickListener(new View.OnClickListener() {
+        Lvl3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Ans3.getText() == answer){
-                    score++;
-                    if(score == 10){
-                        gameEnd();
-                    }
-                    Score.setText("Score: " + score);
-                    updateQuestion(r.nextInt(questionNum));
-                    Toast.makeText(alphabetGame.this,"correct", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(alphabetGame.this,"wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion(r.nextInt(questionNum));
-                }
+                startActivity(new Intent(alphabetGame.this, alphabetGameLvl3.class));
             }
         });
-
-        Ans4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Ans4.getText() == answer){
-                    score++;
-                    if(score == 10){
-                        gameEnd();
-                    }
-                    Score.setText("Score: " + score);
-                    updateQuestion(r.nextInt(questionNum));
-                    Toast.makeText(alphabetGame.this,"correct", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(alphabetGame.this,"wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion(r.nextInt(questionNum));
-                }
-            }
-        });
-    }
-
-    private void updateQuestion(int num){
-        Question.setText(questions.getQuestion(num));
-
-        Ans1.setText(questions.getChoice1(num));
-        Ans2.setText(questions.getChoice2(num));
-        Ans3.setText(questions.getChoice3(num));
-        Ans4.setText(questions.getChoice4(num));
-
-        answer = questions.correct(num);
-    }
-
-    private void gameEnd(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(alphabetGame.this);
-        alertDialogBuilder
-                .setMessage("You reached a score of 10!")
-                .setCancelable(false)
-                .setPositiveButton("Finish",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                startActivity(new Intent(getApplicationContext(), homePage.class));
-                            }
-                        });
     }
 }
