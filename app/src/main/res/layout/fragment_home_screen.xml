@@ -26,19 +26,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="The Future of Child Learning"
-            android:textColor="@color/design_default_color_primary_dark"
+            android:layout_marginTop="10dp"
+            android:fontFamily="cursive"
+            android:text="T h e    F u t u r e    o f"
+            android:textColor="#4D3387"
             android:textSize="15sp"
-            android:textStyle="italic" />
+            android:textStyle="bold|italic" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="306dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="@font/limelight"
             android:text="Children Education"
-            android:textColor="@color/design_default_color_primary_dark"
-            android:textSize="25sp" />
+            android:textColor="#4D3387"
+            android:textSize="28sp" />
     </LinearLayout>
 
 
@@ -122,8 +124,8 @@
                         app:backgroundTint="#FD6F6F" />
 
 
-
                 </LinearLayout>
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -133,6 +135,7 @@
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -213,8 +216,8 @@
                     android:src="@drawable/numbers" />
 
 
-
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="130dp"
@@ -228,6 +231,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -252,6 +256,7 @@
                             android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
