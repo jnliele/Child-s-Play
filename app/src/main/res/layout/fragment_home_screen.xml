@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:fontFamily="cursive"
+            android:fontFamily="@font/kaushan_script"
             android:text="T h e    F u t u r e    o f"
             android:textColor="#4D3387"
             android:textSize="15sp"

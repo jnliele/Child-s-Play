@@ -2,6 +2,7 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/homemade_apple</item>
+        <item>@font/kaushan_script</item>
         <item>@font/limelight</item>
         <item>@font/monofett</item>
     </array>
