@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TeachingToddlers">
-        <activity android:name=".additionLevelThree"></activity>
+        <activity android:name=".countGameLvl3"></activity>
+        <activity android:name=".countGameLvl2" />
+        <activity android:name=".countGameLvl1" />
+        <activity android:name=".additionLevelThree" />
         <activity android:name=".additionLevelTwo" />
         <activity android:name=".additionLevelOne" />
         <activity android:name=".alphabetGameLvl3" />

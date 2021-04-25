@@ -261,7 +261,7 @@ public class ChildProfileFragment extends Fragment {
 
                         // determine whether a level is the child's strength or weakness
                         // passing grade
-                        if (alphLvlOne>=70) {
+                        if (alphLvlOne>=90) {
                             strengthTopicList.add("Letters A-H");
                             strengthAccuracyList.add(alphLvlOne);
                             strengthPlayCountList.add(alphabetLevelOneTotalPlay);
@@ -273,7 +273,7 @@ public class ChildProfileFragment extends Fragment {
                             weakPlayCountList.add(alphabetLevelOneTotalPlay);
                         }
                         // passing grade
-                        if (alphLvlTwo>=70) {
+                        if (alphLvlTwo>=90) {
                             strengthTopicList.add("Letters A-P");
                             strengthAccuracyList.add(alphLvlTwo);
                             strengthPlayCountList.add(alphabetLevelTwoTotalPlay);
@@ -285,7 +285,7 @@ public class ChildProfileFragment extends Fragment {
                             weakPlayCountList.add(alphabetLevelTwoTotalPlay);
                         }
                         // passing grade
-                        if (alphLvlThree>=70) {
+                        if (alphLvlThree>=90) {
                             strengthTopicList.add("Letters A-Z");
                             strengthAccuracyList.add(alphLvlThree);
                             strengthPlayCountList.add(alphabetLevelThreeTotalPlay);
@@ -297,7 +297,7 @@ public class ChildProfileFragment extends Fragment {
                             weakPlayCountList.add(alphabetLevelThreeTotalPlay);
                         }
                         // passing grade
-                        if (countLvlOne>=70) {
+                        if (countLvlOne>=90) {
                             strengthTopicList.add("Count Numbers 0-5");
                             strengthAccuracyList.add(countLvlOne);
                             strengthPlayCountList.add(countingLevelOneTotalPlay);
@@ -309,7 +309,7 @@ public class ChildProfileFragment extends Fragment {
                             weakPlayCountList.add(countingLevelOneTotalPlay);
                         }
                         // passing grade
-                        if (countLvlTwo>=70) {
+                        if (countLvlTwo>=90) {
                             strengthTopicList.add("Count Numbers 0-10");
                             strengthAccuracyList.add(countLvlTwo);
                             strengthPlayCountList.add(countingLevelTwoTotalPlay);
@@ -321,7 +321,7 @@ public class ChildProfileFragment extends Fragment {
                             weakPlayCountList.add(countingLevelTwoTotalPlay);
                         }
                         // passing grade
-                        if (countLvlThree>=70) {
+                        if (countLvlThree>=90) {
                             strengthTopicList.add("Count Numbers 0-20");
                             strengthAccuracyList.add(countLvlThree);
                             strengthPlayCountList.add(countingLevelThreeTotalPlay);
@@ -333,7 +333,7 @@ public class ChildProfileFragment extends Fragment {
                             weakPlayCountList.add(countingLevelThreeTotalPlay);
                         }
                         // passing grade
-                        if (addLvlOne>=70) {
+                        if (addLvlOne>=90) {
                             strengthTopicList.add("Add with Single Digits");
                             strengthAccuracyList.add(addLvlOne);
                             strengthPlayCountList.add(additionLevelOneTotalPlay);
@@ -345,7 +345,7 @@ public class ChildProfileFragment extends Fragment {
                             weakPlayCountList.add(additionLevelOneTotalPlay);
                         }
                         // passing grade
-                        if (addLvlTwo>=70) {
+                        if (addLvlTwo>=90) {
                             strengthTopicList.add("Add with Double Digits");
                             strengthAccuracyList.add(addLvlTwo);
                             strengthPlayCountList.add(additionLevelTwoTotalPlay);
@@ -357,7 +357,7 @@ public class ChildProfileFragment extends Fragment {
                             weakPlayCountList.add(additionLevelTwoTotalPlay);
                         }
                         // passing grade
-                        if (addLvlThree>=70) {
+                        if (addLvlThree>=90) {
                             strengthTopicList.add("Add with Triple Digits");
                             strengthAccuracyList.add(addLvlThree);
                             strengthPlayCountList.add(additionLevelThreeTotalPlay);
@@ -374,6 +374,13 @@ public class ChildProfileFragment extends Fragment {
                             strengthTopicList.add("-");
                             strengthAccuracyList.add(Long.valueOf(-1));
                             strengthPlayCountList.add(Long.valueOf(-1));
+                        }
+
+                        // make sure weaknesses list isn't empty
+                        if (weakTopicList.isEmpty()) {
+                            weakTopicList.add("-");
+                            weakAccuracyList.add(Long.valueOf(-1));
+                            weakPlayCountList.add(Long.valueOf(-1));
                         }
 
                         // only update recycler if on child profile

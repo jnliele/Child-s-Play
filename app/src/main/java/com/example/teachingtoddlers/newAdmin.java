@@ -195,6 +195,13 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
             password.requestFocus();
             return;
         }
+
+        if(pw.length() < 6){
+            password.setError("Password must be at least 6 characters!");
+            password.requestFocus();
+            return;
+        }
+
         if(pw.length() > 20){
             password.setError("Password must not exceed 20 characters!");
             password.requestFocus();
