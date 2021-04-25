@@ -11,6 +11,9 @@ public class alphabetGame extends AppCompatActivity {
 
     Button Lvl1, Lvl2, Lvl3;
 
+    alphabetGameLvl1 Lvl1Score = new alphabetGameLvl1();
+    alphabetGameLvl2 Lvl2Score = new alphabetGameLvl2();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

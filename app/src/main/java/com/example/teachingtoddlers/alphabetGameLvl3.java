@@ -24,6 +24,7 @@ public class alphabetGameLvl3 extends AppCompatActivity {
 
     String answer;
     int score = 0;
+    int totalQuestions = 0;
     int questionNum = questions.questionsLvl3.length;
 
     Random r;
@@ -51,18 +52,16 @@ public class alphabetGameLvl3 extends AppCompatActivity {
             public void onClick(View view) {
                 if(Ans1.getText() == answer){
                     score++;
-                    if(score == 10){
-                        gameEnd();
-                    }else{
-                        Score.setText("Score: " + score);
-                        updateQuestion(r.nextInt(questionNum));
-                        Toast.makeText(alphabetGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
-                    }
-
+                    Score.setText("Score: " + score);
+                    Toast.makeText(alphabetGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(alphabetGameLvl3.this, "wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion(r.nextInt(questionNum));
                 }
+                totalQuestions++;
+                if(totalQuestions == 10){
+                    gameEnd();
+                }
+                updateQuestion(r.nextInt(questionNum));
             }
         });
 
@@ -71,18 +70,16 @@ public class alphabetGameLvl3 extends AppCompatActivity {
             public void onClick(View view) {
                 if(Ans2.getText() == answer){
                     score++;
-                    if(score == 10){
-                        gameEnd();
-                    }else{
-                        Score.setText("Score: " + score);
-                        updateQuestion(r.nextInt(questionNum));
-                        Toast.makeText(alphabetGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
-                    }
-
+                    Score.setText("Score: " + score);
+                    Toast.makeText(alphabetGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(alphabetGameLvl3.this, "wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion(r.nextInt(questionNum));
                 }
+                totalQuestions++;
+                if(totalQuestions == 10){
+                    gameEnd();
+                }
+                updateQuestion(r.nextInt(questionNum));
             }
         });
 
@@ -91,18 +88,16 @@ public class alphabetGameLvl3 extends AppCompatActivity {
             public void onClick(View view) {
                 if(Ans3.getText() == answer){
                     score++;
-                    if(score == 10){
-                        gameEnd();
-                    }else{
-                        Score.setText("Score: " + score);
-                        updateQuestion(r.nextInt(questionNum));
-                        Toast.makeText(alphabetGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
-                    }
-
+                    Score.setText("Score: " + score);
+                    Toast.makeText(alphabetGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(alphabetGameLvl3.this, "wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion(r.nextInt(questionNum));
                 }
+                totalQuestions++;
+                if(totalQuestions == 10){
+                    gameEnd();
+                }
+                updateQuestion(r.nextInt(questionNum));
             }
         });
 
@@ -111,34 +106,52 @@ public class alphabetGameLvl3 extends AppCompatActivity {
             public void onClick(View view) {
                 if(Ans4.getText() == answer){
                     score++;
-                    if(score == 10){
-                        gameEnd();
-                    }else{
-                        Score.setText("Score: " + score);
-                        updateQuestion(r.nextInt(questionNum));
-                        Toast.makeText(alphabetGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
-                    }
-
+                    Score.setText("Score: " + score);
+                    Toast.makeText(alphabetGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(alphabetGameLvl3.this, "wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion(r.nextInt(questionNum));
                 }
+                totalQuestions++;
+                if(totalQuestions == 10){
+                    gameEnd();
+                }
+                updateQuestion(r.nextInt(questionNum));
             }
         });
     }
 
     private void gameEnd() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(alphabetGameLvl3.this);
-        alertDialogBuilder
-                .setMessage("You reached a score of 10!")
-                .setCancelable(false)
-                .setPositiveButton("Finish",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                startActivity(new Intent(getApplicationContext(), alphabetGame.class));
-                            }
-                        });
+        if(score > 6){
+            alertDialogBuilder
+                    .setMessage("Your final score " + score + "/10")
+                    .setCancelable(false)
+                    .setPositiveButton("Back",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    startActivity(new Intent(getApplicationContext(), alphabetGame.class));
+                                }
+                            });
+        }else {
+            alertDialogBuilder
+                    .setMessage("Your final score " + score + "/10")
+                    .setCancelable(false)
+                    .setPositiveButton("Replay",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    startActivity(new Intent(getApplicationContext(), alphabetGameLvl3.class));
+                                }
+                            })
+                    .setNegativeButton("Back",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    startActivity(new Intent(getApplicationContext(), alphabetGame.class));
+                                }
+                            });
+        }
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }

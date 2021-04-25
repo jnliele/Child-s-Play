@@ -121,7 +121,7 @@ public class alphabetQuestions {
 
     private String answersLvl1[] = {"a","b","c","d","e","f","g","h"};
     private String answersLvl2[] = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p"};
-    private String answersLvl3[] = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","x","w","y","z"};
+    private String answersLvl3[] = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
 
     //Level 1
     public String getQuestionLvl1(int a){
