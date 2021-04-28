@@ -38,14 +38,6 @@ public class countGameLvl1 extends AppCompatActivity {
     FirebaseDatabase rootNode;
     DatabaseReference reference;
 
-    countGame LOL = new countGame();
-
-
-
-
-    int highscore=0;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

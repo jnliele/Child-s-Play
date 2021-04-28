@@ -1,5 +1,6 @@
 package com.example.teachingtoddlers;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +12,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.Random;
 
 public class countGameLvl3 extends AppCompatActivity {
@@ -19,18 +27,22 @@ public class countGameLvl3 extends AppCompatActivity {
 
     Button Ans1, Ans2, Ans3, Ans4;
     TextView Score, Question;
-    String answer;
+    String answer, Id;
     int score = 0;
-    int questionCount=0;
+    long questionCount=0, temp=0;
     int questionNum = questions.Level3questions.length;
+    long levelThreeTotalPlayCount=0,levelThreeTotalCorrect=0,levelThreeTotalquestions=0;
+    long levelThreeHighScore =0;
     Random ran;
 
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_count_game_levels);
-
+        temp++;
         ran = new Random();
 
         Ans1 = (Button) findViewById(R.id.A);
@@ -117,6 +129,38 @@ public class countGameLvl3 extends AppCompatActivity {
     }
 
     private void gameEnd() {
+        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        rootNode= FirebaseDatabase.getInstance();
+        reference =  rootNode.getReference("Users");
+        Id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        reference.addListenerForSingleValueEvent(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()) {
+                    if (ds.child("email").getValue().equals(userEmail)) {
+
+                        levelThreeTotalCorrect = ds.child("countingLevelThreeCorrect").getValue(Long.class);
+                        levelThreeTotalPlayCount = ds.child("countingLevelThreeTotalPlay").getValue(Long.class);
+                        levelThreeTotalquestions = ds.child("countingLevelThreeTotal").getValue(Long.class);
+
+                        levelThreeTotalPlayCount = levelThreeTotalPlayCount + temp;
+                        levelThreeTotalquestions = levelThreeTotalquestions + questionCount;
+                        levelThreeTotalCorrect = levelThreeTotalCorrect + score;
+
+                        reference.child(Id).child("countingLevelThreeCorrect").setValue(levelThreeTotalCorrect);
+                        reference.child(Id).child("countingLevelThreeTotalPlay").setValue(levelThreeTotalPlayCount);
+                        reference.child(Id).child("countingLevelThreeTotal").setValue(levelThreeTotalquestions);
+
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(countGameLvl3.this);
         if(score > 6){
             alertDialogBuilder
