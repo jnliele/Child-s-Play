@@ -38,6 +38,8 @@ public class additionLevelOne extends AppCompatActivity {
     TextView tv_score, tv_questions, tv_timer, tv_bottomMessage;
     ProgressBar prog_timer;
     long levelOneTotalPlayCount=0, temp=0;
+    double currentHighPercent, passingGrade =.70;
+    double result;
     long levelOneTotalCorrect;
     int highScore=0;
     long numCorrectAnswers =0;
@@ -106,13 +108,18 @@ public class additionLevelOne extends AppCompatActivity {
                                     levelOneTotalCorrect = ds.child("additionLevelOneCorrect").getValue(Long.class);
                                     levelOneTotalPlayCount = ds.child("additionLevelOneTotalPlay").getValue(Long.class);
                                     levelOneTotalquestions = ds.child("additionLevelOneTotal").getValue(Long.class);
+                                    currentHighPercent = ds.child("additionLevelOneScore").getValue(Double.class);
 
-                                    highScore =(int)(levelOneTotalCorrect);
-                                    if(highScore<g.getNumberCorrect()){
-                                        highScore =  g.getNumberCorrect();
+                                    result =((double)(g.getNumberCorrect())/(double)(g.getTotalQuestions()-1));
+
+                                    if(result> currentHighPercent && g.getTotalQuestions()> 5) {
+                                        reference.child(Id).child("additionLevelOneScore").setValue(result);
+                                        currentHighPercent =result;
+
+                                        if(currentHighPercent>= passingGrade);
+                                            btn_nextLevel.setVisibility(View.VISIBLE);
+
                                     }
-
-
 
                                     levelOneTotalPlayCount = levelOneTotalPlayCount +temp;
                                     levelOneTotalquestions = levelOneTotalquestions + (g.getTotalQuestions() - 1);
@@ -122,6 +129,8 @@ public class additionLevelOne extends AppCompatActivity {
                                     reference.child(Id).child("additionLevelOneCorrect").setValue(levelOneTotalCorrect);
                                     reference.child(Id).child("additionLevelOneTotalPlay").setValue(levelOneTotalPlayCount);
                                     reference.child(Id).child("additionLevelOneTotal").setValue(levelOneTotalquestions);
+
+
 
                                 }
                             }
@@ -133,9 +142,7 @@ public class additionLevelOne extends AppCompatActivity {
 
                     });
 
-                    if(g.getNumberCorrect()>=10){
-                       btn_nextLevel.setVisibility(View.VISIBLE);
-                 }
+
 
 
                     btn_backToLevels.setOnClickListener(new View.OnClickListener() {
@@ -214,10 +221,10 @@ public class additionLevelOne extends AppCompatActivity {
                 start_button.setVisibility(View.INVISIBLE);
                 btn_backToLevels.setVisibility(View.INVISIBLE);
                 btn_nextLevel.setVisibility(View.INVISIBLE);
-                temp= levelOneTotalPlayCount++;
+                temp++;
                 tv_score.setText("0pts");
                 secondsRemaining = 30;
-                g = new additonGameCode();
+                g.additonGameCode1();
                 nextTurn();
                 timer.start();
             }

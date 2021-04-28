@@ -20,11 +20,11 @@ import com.google.firebase.database.ValueEventListener;
 public class additionGame extends AppCompatActivity {
     Button levelOneButton,levelTwoButton,levelThreeButton;
     TextView goToHome;
-    long levelOneTotalCorrect, levelOneTotalquestions;
+    long levelOneTotalCorrect,levelTwoTotalCorrect, levelOneTotalquestions, levelTwoTotalquestions, levelThreeTotalCorrect, levelThreeTotalquestions;
     String Id, levelOneTotalCorrectStr;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-    double passing = .70;
+    double currentHighPercentLevelOne,currentHighPercentLevelTwo,currentHighPercentLevelThree, passing = .70;
 
 
 
@@ -79,7 +79,6 @@ public class additionGame extends AppCompatActivity {
 
 
 
-
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         rootNode= FirebaseDatabase.getInstance();
         reference =  rootNode.getReference("Users");
@@ -97,19 +96,27 @@ public class additionGame extends AppCompatActivity {
                         levelOneTotalCorrect = ds.child("additionLevelOneCorrect").getValue(Long.class);
                         levelOneTotalquestions = ds.child("additionLevelOneTotal").getValue(Long.class);
 
+                        levelTwoTotalCorrect = ds.child("additionLevelTwoCorrect").getValue(Long.class);
+                        levelTwoTotalquestions = ds.child("additionLevelTwoTotal").getValue(Long.class);
 
-                        if((levelOneTotalCorrect!=0) && (levelOneTotalquestions!=0)){
+                        levelThreeTotalCorrect = ds.child("additionLevelThreeCorrect").getValue(Long.class);
+                        levelThreeTotalquestions = ds.child("additionLevelThreeTotal").getValue(Long.class);
 
-                            if(((double)(levelOneTotalCorrect/levelOneTotalquestions)>=passing)&& (levelOneTotalCorrect>5))
-                            {
-                                levelTwoButton.setEnabled(true);
-                            }else {
+                        currentHighPercentLevelOne = ds.child("additionLevelOneScore").getValue(Double.class);
+                        currentHighPercentLevelTwo = ds.child("additionLevelTwoScore").getValue(Double.class);
 
-                                levelTwoButton.setEnabled(false);
 
-                            }
 
-                        }
+
+                        if( (currentHighPercentLevelOne > passing) && (levelOneTotalquestions>=5))
+                            levelTwoButton.setEnabled(true);
+
+
+                        if(currentHighPercentLevelTwo > passing && (levelTwoTotalquestions>=5))
+                            levelThreeButton.setEnabled(true);
+
+
+
 
                     }
                 }
@@ -121,11 +128,5 @@ public class additionGame extends AppCompatActivity {
 
         });
 
-
-
-
-
-
-
     }
-    }
+}

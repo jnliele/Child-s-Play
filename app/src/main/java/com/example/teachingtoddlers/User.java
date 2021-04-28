@@ -21,7 +21,7 @@ public class User {
     // the high score of questions in a level
     public long countingLevelOneScore, countingLevelTwoScore;
     public long alphabetLevelOneScore, alphabetLevelTwoScore;
-    public double additionLevelOneScore, additionLevelTwoScore;
+    public double additionLevelOneScore, additionLevelTwoScore, additionLevelThreeScore;
 
     public User(){
     }
@@ -73,5 +73,6 @@ public class User {
         countingLevelTwoScore = 0;
         additionLevelOneScore = 0;
         additionLevelTwoScore = 0;
+        additionLevelThreeScore=0;
     }
 }

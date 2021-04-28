@@ -12,8 +12,12 @@ public class additonGameCode {
     private int score;
     private addQuestions currentQuestion;
 
+    public  additonGameCode (){
 
-    public additonGameCode(){
+    }
+
+
+    public void additonGameCode1(){
 
         numberCorrect = 0;
         numberIncorrect =0;
@@ -31,6 +35,47 @@ public class additonGameCode {
         questions.add(currentQuestion);
 
     }
+    public void additonGameCode2(){
+
+        numberCorrect = 0;
+        numberIncorrect =0;
+        totalQuestions = 0;
+        score=0;
+        currentQuestion = new addQuestions(99);
+        questions = new ArrayList<>();
+
+    }
+
+    public void makeNewQuestion2(){
+
+        currentQuestion= new addQuestions(99);
+        totalQuestions++;
+        questions.add(currentQuestion);
+
+    }
+
+    public void additonGameCode3(){
+
+        numberCorrect = 0;
+        numberIncorrect =0;
+        totalQuestions = 0;
+        score=0;
+        currentQuestion = new addQuestions(999);
+        questions = new ArrayList<>();
+
+    }
+
+    public void makeNewQuestion3(){
+
+        currentQuestion= new addQuestions(999);
+        totalQuestions++;
+        questions.add(currentQuestion);
+
+    }
+
+
+
+
 
     public boolean checkAnswer(int submittedAnswer){
         boolean isCorrect;
