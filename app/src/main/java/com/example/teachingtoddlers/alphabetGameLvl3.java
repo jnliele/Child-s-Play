@@ -1,8 +1,5 @@
 package com.example.teachingtoddlers;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +8,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Random;
 
@@ -22,17 +28,21 @@ public class alphabetGameLvl3 extends AppCompatActivity {
     Button Ans1, Ans2, Ans3, Ans4;
     TextView Score, Question;
 
-    String answer;
-    int score = 0;
-    int totalQuestions = 0;
+    String answer, id;
+    long score = 0;
+    long totalQuestions = 0;
+    long tempScore, tempTQ, tempTP;
+
     int questionNum = questions.questionsLvl3.length;
 
     Random r;
 
+    DatabaseReference reference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alphabet_game_lvl3);
+        setContentView(R.layout.activity_alphabet_game_lvl1);
 
         r = new Random();
 
@@ -120,13 +130,44 @@ public class alphabetGameLvl3 extends AppCompatActivity {
         });
     }
 
-    private void gameEnd() {
+    public void gameEnd() {
+        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()){
+                    if(ds.child("email").getValue().equals(userEmail)){
+                        tempScore = ds.child("alphabetLevelThreeCorrect").getValue(Long.class);
+                        tempTQ = ds.child("alphabetLevelThreeTotal").getValue(Long.class);
+                        tempTP = ds.child("alphabetLevelThreeTotalPlay").getValue(Long.class);
+
+                        reference.child(id).child("alphabetLevelThreeCorrect").setValue(score+tempScore);
+                        reference.child(id).child("alphabetLevelThreeTotal").setValue(totalQuestions+tempTQ);
+                        reference.child(id).child("alphabetLevelThreeTotalPlay").setValue(tempTP+1);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(alphabetGameLvl3.this);
-        if(score > 6){
+        if(score == 10){
             alertDialogBuilder
-                    .setMessage("Your final score " + score + "/10")
+                    .setMessage("Your final score " + score + "/10\nCongratulations, you have learned the alphabet!")
                     .setCancelable(false)
-                    .setPositiveButton("Back",
+                    .setPositiveButton("Replay",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    startActivity(new Intent(getApplicationContext(), alphabetGameLvl3.class));
+                                }
+                            })
+                    .setNegativeButton("Back",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {

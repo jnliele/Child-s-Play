@@ -1,8 +1,5 @@
 package com.example.teachingtoddlers;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +8,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Random;
 
@@ -22,17 +28,20 @@ public class alphabetGameLvl2 extends AppCompatActivity {
     Button Ans1, Ans2, Ans3, Ans4;
     TextView Score, Question;
 
-    String answer;
-    int score = 0;
-    int totalQuestions = 0;
+    String answer, id;
+    long score = 0;
+    long totalQuestions = 0;
+    long tempScore, tempTQ, tempTP, highScore;
     int questionNum = questions.questionsLvl2.length;
 
     Random r;
 
+    DatabaseReference reference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alphabet_game_lvl2);
+        setContentView(R.layout.activity_alphabet_game_lvl1);
 
         r = new Random();
 
@@ -120,7 +129,36 @@ public class alphabetGameLvl2 extends AppCompatActivity {
         });
     }
 
-    private void gameEnd() {
+    public void gameEnd() {
+        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()){
+                    if(ds.child("email").getValue().equals(userEmail)){
+                        tempScore = ds.child("alphabetLevelTwoCorrect").getValue(Long.class);
+                        tempTQ = ds.child("alphabetLevelTwoTotal").getValue(Long.class);
+                        tempTP = ds.child("alphabetLevelTwoTotalPlay").getValue(Long.class);
+                        highScore = ds.child("alphabetLevelTwoScore").getValue(Long.class);
+
+                        reference.child(id).child("alphabetLevelTwoCorrect").setValue(score+tempScore);
+                        reference.child(id).child("alphabetLevelTwoTotal").setValue(totalQuestions+tempTQ);
+                        reference.child(id).child("alphabetLevelTwoTotalPlay").setValue(tempTP+1);
+
+                        if(score > highScore){
+                            reference.child(id).child("alphabetLevelTwoScore").setValue(score);
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(alphabetGameLvl2.this);
         if(score > 6){
             alertDialogBuilder
@@ -172,9 +210,5 @@ public class alphabetGameLvl2 extends AppCompatActivity {
         Ans4.setText(questions.getChoice4Lvl2(num));
 
         answer = questions.correctLvl2(num);
-    }
-
-    public int getScore(){
-        return score;
     }
 }
