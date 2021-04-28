@@ -4,38 +4,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".alphabetGame">
+    android:background="@drawable/add_launch_level_background">
+
 
     <Button
         android:id="@+id/Level1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Level 1"
+        android:layout_width="155dp"
+        android:layout_height="60dp"
+        android:text="Level One"
+        app:backgroundTint="#2196F3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.221" />
+        app:layout_constraintVertical_bias="0.594" />
 
     <Button
         android:id="@+id/Level2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Level 2"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="155dp"
+        android:layout_height="60dp"
+        android:enabled="false"
+        android:text="Level Two"
+        app:backgroundTint="#2196F3"
+        app:layout_constraintBottom_toTopOf="@+id/Level3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Level1"
-        app:layout_constraintVertical_bias="0.293" />
+        app:layout_constraintVertical_bias="0.505" />
 
     <Button
         android:id="@+id/Level3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Level 3"
+        android:layout_width="155dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        android:enabled="false"
+        android:text="Level Three"
+        app:backgroundTint="#2196F3"
+        app:layout_constraintBottom_toTopOf="@+id/goToHomepage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Level1c"
+        app:layout_constraintVertical_bias="0.683" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Level2" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.29"
+        app:srcCompat="@drawable/abc" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="Alphabet Game"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.09" />
+
+    <TextView
+        android:id="@+id/goToHomepage"
+        android:layout_width="225dp"
+        android:layout_height="41dp"
+        android:gravity="center"
+        android:text="Back To Home"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
 </androidx.constraintlayout.widget.ConstraintLayout>
