@@ -21,6 +21,17 @@
     <color name="gray">#afafaf</color>
     <color name="lightPruple">#a55eea</color>
     <color name="lightRed">#ff7979</color>
+    <color name="colorTransParent">#00ffffff</color>
+    <color name="startColor">#D9FF43</color>
+    <color name="centerColor">#F67831</color>
+    <color name="endColor">#FF1493</color>
+
+
+
+
+
+
+
 
 
 

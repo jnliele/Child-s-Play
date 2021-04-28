@@ -44,6 +44,7 @@ public class newAdmin extends AppCompatActivity implements View.OnClickListener{
     private FirebaseStorage storage;
     private StorageReference storageRef;
     public String image;
+    additionLevelOne n = new additionLevelOne();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

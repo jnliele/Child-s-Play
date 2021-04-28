@@ -55,6 +55,8 @@
         android:id="@+id/levelTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:enabled="false"
+
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:layout_weight="1"
@@ -69,6 +71,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:enabled="false"
+
         android:layout_marginTop="30dp"
         android:layout_weight="1"
         android:paddingBottom="10dp"

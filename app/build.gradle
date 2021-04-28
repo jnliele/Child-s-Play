@@ -50,5 +50,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     androidTestImplementation 'androidx.test:rules:1.4.0-alpha05'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
-
+    implementation 'com.scwang.wave:MultiWaveHeader:1.0.0-alpha-1'
 }

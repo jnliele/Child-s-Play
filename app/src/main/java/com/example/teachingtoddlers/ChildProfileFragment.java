@@ -149,7 +149,10 @@ public class ChildProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()){
-                    if (ds.child("email").getValue().equals(userEmail)){
+                    if (ds.child("email").getValue().equals(userEmail))
+                    {
+
+
                         fullName.setText(ds.child("childFirst").getValue(String.class) + " " + ds.child("childLast").getValue(String.class));
                         ageRange.setText(ds.child("ageRange").getValue(String.class));
                         alphabetLevelOneTotalPlay = ds.child("alphabetLevelOneTotalPlay").getValue(Long.class);

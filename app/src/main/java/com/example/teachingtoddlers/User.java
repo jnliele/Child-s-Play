@@ -11,7 +11,7 @@ public class User {
     // the total number of questions the user gets right in a level
     public long alphabetLevelOneCorrect, alphabetLevelTwoCorrect, alphabetLevelThreeCorrect;
     public long countingLevelOneCorrect, countingLevelTwoCorrect, countingLevelThreeCorrect;
-    public long additionLevelOneCorrect, additionLevelTwoCorrect, additionLevelThreeCorrect;
+    public long additionLevelOneCorrect,additionLevelTwoCorrect, additionLevelThreeCorrect;
 
     // the total number of questions done/attempted in a level
     public long alphabetLevelOneTotal, alphabetLevelTwoTotal, alphabetLevelThreeTotal;
@@ -24,6 +24,7 @@ public class User {
     // constructor to store all the information upon registration for database
     public User(String email, String fname, String lname, String utaID, String prof, String pw,
                 String childFirst, String childLast, String ageRange, String image){
+
         this.email = email;
         this.fname = fname;
         this.lname = lname;
@@ -34,7 +35,7 @@ public class User {
         this.childLast = childLast;
         this.ageRange = ageRange;
         this.image = image;
-        alphabetLevelOneTotalPlay = 0;
+        alphabetLevelOneTotalPlay =0;
         alphabetLevelTwoTotalPlay = 0;
         alphabetLevelThreeTotalPlay = 0;
         countingLevelOneTotalPlay = 0;
