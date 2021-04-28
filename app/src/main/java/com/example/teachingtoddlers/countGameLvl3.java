@@ -42,23 +42,21 @@ public class countGameLvl3 extends AppCompatActivity {
         Score.setText("Score: " + score);
 
         updateQuestion(ran.nextInt(questionNum));
-        questionCount++;
 
         Ans1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vi) {
                 if(Ans1.getText() == answer){
                     score++;
-                    if(score == 10){
-                        gameEnd();
-                    }else{
-                        Score.setText("Score: " + score);
-                        Toast.makeText(countGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
-                    }
+                    Score.setText("Score: " + score);
+                    Toast.makeText(countGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(countGameLvl3.this, "incorrect", Toast.LENGTH_SHORT).show();
                 }
                 questionCount++;
+                if(questionCount == 10) {
+                    gameEnd();
+                }
                 updateQuestion(ran.nextInt(questionNum));
             }
         });
@@ -68,55 +66,51 @@ public class countGameLvl3 extends AppCompatActivity {
             public void onClick(View vi) {
                 if(Ans2.getText() == answer){
                     score++;
-                    if(score == 10){
-                        gameEnd();
-                    }else{
-                        Score.setText("Score: " + score);
-                        Toast.makeText(countGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
-                    }
-
+                    Score.setText("Score: " + score);
+                    Toast.makeText(countGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(countGameLvl3.this, "incorrect", Toast.LENGTH_SHORT).show();
                 }
                 questionCount++;
+                if(questionCount == 10) {
+                    gameEnd();
+                }
                 updateQuestion(ran.nextInt(questionNum));
             }
         });
+
         Ans3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vi) {
                 if(Ans3.getText() == answer){
                     score++;
-                    if(score == 10){
-                        gameEnd();
-                    }else{
-                        Score.setText("Score: " + score);
-                        Toast.makeText(countGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
-                    }
-
+                    Score.setText("Score: " + score);
+                    Toast.makeText(countGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(countGameLvl3.this, "incorrect", Toast.LENGTH_SHORT).show();
                 }
                 questionCount++;
+                if(questionCount == 10) {
+                    gameEnd();
+                }
                 updateQuestion(ran.nextInt(questionNum));
             }
         });
+
         Ans4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vi) {
                 if(Ans4.getText() == answer){
                     score++;
-                    if(score == 10){
-                        gameEnd();
-                    }else{
-                        Score.setText("Score: " + score);
-                        Toast.makeText(countGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
-                    }
-
+                    Score.setText("Score: " + score);
+                    Toast.makeText(countGameLvl3.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(countGameLvl3.this, "incorrect", Toast.LENGTH_SHORT).show();
                 }
                 questionCount++;
+                if(questionCount == 10) {
+                    gameEnd();
+                }
                 updateQuestion(ran.nextInt(questionNum));
             }
         });
@@ -124,9 +118,9 @@ public class countGameLvl3 extends AppCompatActivity {
 
     private void gameEnd() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(countGameLvl3.this);
-        if(questionCount < 15){
+        if(score > 6){
             alertDialogBuilder
-                    .setMessage("Congratulations! You mastered counting! Your final score is " + score + "/"+questionCount)
+                    .setMessage("Congratulations! You mastered counting! Your final score is " + score + "/10")
                     .setCancelable(false)
                     .setPositiveButton("Back",
                             new DialogInterface.OnClickListener() {
@@ -137,7 +131,7 @@ public class countGameLvl3 extends AppCompatActivity {
                             });
         }else {
             alertDialogBuilder
-                    .setMessage("Your final score " + score + "/"+questionCount)
+                    .setMessage("Your final score " + score + "/10")
                     .setCancelable(false)
                     .setPositiveButton("Replay",
                             new DialogInterface.OnClickListener() {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tan">
+    android:background="@drawable/add_launch_level_background">
 
 
     <Button
@@ -23,6 +23,7 @@
         android:id="@+id/Level2c"
         android:layout_width="155dp"
         android:layout_height="60dp"
+        android:enabled="false"
         android:text="Level Two"
         app:backgroundTint="#2196F3"
         app:layout_constraintBottom_toTopOf="@+id/Level3c"
@@ -35,6 +36,7 @@
         android:id="@+id/Level3c"
         android:layout_width="155dp"
         android:layout_height="60dp"
+        android:enabled="false"
         android:layout_marginBottom="16dp"
         android:text="Level Three"
         app:backgroundTint="#2196F3"

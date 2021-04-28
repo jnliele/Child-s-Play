@@ -1,5 +1,6 @@
 package com.example.teachingtoddlers;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,10 +9,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class countGame extends AppCompatActivity {
 
     Button levelOne, levelTwo, levelThree;
     TextView goToHomepage;
+    long levelOneTotalCorrect, levelOneTotalquestions, levelOneHighScore, levelTwoHighScore;
+    String Id;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
+    long passing = 7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +64,41 @@ public class countGame extends AppCompatActivity {
             }
         });
 
+        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        rootNode= FirebaseDatabase.getInstance();
+        reference =  rootNode.getReference("Users");
+        Id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds : snapshot.getChildren()) {
+                    if (ds.child("email").getValue().equals(userEmail)) {
+
+                        levelOneTotalCorrect = ds.child("countingLevelOneCorrect").getValue(Long.class);
+                        levelOneTotalquestions = ds.child("countingLevelOneTotal").getValue(Long.class);
+                        levelOneHighScore = ds.child("countingLevelOneScore").getValue(Long.class);
+                        levelTwoHighScore = ds.child("countingLevelTwoScore").getValue(Long.class);
+
+                        if((levelOneTotalCorrect!=0) && (levelOneTotalquestions!=0))
+                        {
+                            if (levelOneHighScore >= passing) {
+                                levelTwo.setEnabled(true);
+                            }
+                        }
+                        if (levelTwoHighScore >= passing) {
+                            levelThree.setEnabled(true);
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
     }
 
 
