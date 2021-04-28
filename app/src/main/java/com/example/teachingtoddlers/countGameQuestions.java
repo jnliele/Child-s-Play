@@ -8,6 +8,11 @@ public class countGameQuestions {
             "What number goes in the blank\n1 2 _ 4 5",
             "What number goes in the blank\n1 2 3 _ 5",
             "What number goes in the blank\n1 2 3 4 _",
+            "what number goes first?",
+            "what number goes after 1?",
+            "what number goes after 2?",
+            "what number goes after 3?",
+            "what number goes after 4?",
     };
 
     public String Level2questions[] = {
@@ -52,6 +57,11 @@ public class countGameQuestions {
             {"1", "3", "4", "2"},
             {"1", "5", "4", "3"},
             {"3", "2", "4", "5"},
+            {"1", "4", "5", "2"},
+            {"5", "1", "2", "3"},
+            {"1", "3", "4", "2"},
+            {"1", "5", "4", "3"},
+            {"3", "2", "4", "5"}
     };
 
     private String Level2choices[][] = {
@@ -64,7 +74,7 @@ public class countGameQuestions {
             {"9", "7", "4", "3"},
             {"4", "9", "10", "8"},
             {"9", "7", "6", "1"},
-            {"7", "2", "10", "5"},
+            {"7", "2", "10", "5"}
     };
 
     private String Level3choices[][] = {
@@ -87,10 +97,10 @@ public class countGameQuestions {
             {"15", "17", "13", "7"},
             {"18", "16", "19", "8"},
             {"19", "1", "4", "9"},
-            {"15", "20", "10", "5"},
+            {"15", "20", "10", "5"}
     };
 
-    private String Level1answers[] = {"1","2","3","4","5"};
+    private String Level1answers[] = {"1","2","3","4","5","1","2","3","4","5"};
     private String Level2answers[] = {"1","2","3","4","5","6","7","8","9","10"};
     private String Level3answers[] = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"};
 
