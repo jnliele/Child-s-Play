@@ -45,6 +45,7 @@ public class alphabetGameLvl2 extends AppCompatActivity {
 
         r = new Random();
 
+        //grabbing the id's from the xml
         Ans1 = (Button) findViewById(R.id.Ans1);
         Ans2 = (Button) findViewById(R.id.Ans2);
         Ans3 = (Button) findViewById(R.id.Ans3);
@@ -56,10 +57,12 @@ public class alphabetGameLvl2 extends AppCompatActivity {
 
         updateQuestion(r.nextInt(questionNum));
 
+        //Setting up the answer choices to create a multiple choice quiz
         Ans1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(Ans1.getText() == answer){
+                    //increasing the score count when this button is the correct answer
                     score++;
                     Score.setText("Score: " + score);
                     Toast.makeText(alphabetGameLvl2.this, "correct", Toast.LENGTH_SHORT).show();
@@ -68,8 +71,10 @@ public class alphabetGameLvl2 extends AppCompatActivity {
                 }
                 totalQuestions++;
                 if(totalQuestions == 10){
+                    //once 10 questions have been asked, the game will end
                     gameEnd();
                 }
+                //updates the question to a random question
                 updateQuestion(r.nextInt(questionNum));
             }
         });
@@ -130,6 +135,7 @@ public class alphabetGameLvl2 extends AppCompatActivity {
     }
 
     public void gameEnd() {
+        //setting up the firebase connection to update the information in the database for this account for this level.
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         reference = FirebaseDatabase.getInstance().getReference("Users");
@@ -138,15 +144,18 @@ public class alphabetGameLvl2 extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()){
                     if(ds.child("email").getValue().equals(userEmail)){
+                        //grabbing the current information in the database
                         tempScore = ds.child("alphabetLevelTwoCorrect").getValue(Long.class);
                         tempTQ = ds.child("alphabetLevelTwoTotal").getValue(Long.class);
                         tempTP = ds.child("alphabetLevelTwoTotalPlay").getValue(Long.class);
                         highScore = ds.child("alphabetLevelTwoScore").getValue(Long.class);
 
+                        //adding to the current database and updating the information
                         reference.child(id).child("alphabetLevelTwoCorrect").setValue(score+tempScore);
                         reference.child(id).child("alphabetLevelTwoTotal").setValue(totalQuestions+tempTQ);
                         reference.child(id).child("alphabetLevelTwoTotalPlay").setValue(tempTP+1);
 
+                        //if their highscore has been beaten, the highscore in the database will be replaced
                         if(score > highScore){
                             reference.child(id).child("alphabetLevelTwoScore").setValue(score);
                         }
@@ -159,7 +168,9 @@ public class alphabetGameLvl2 extends AppCompatActivity {
             }
         });
 
+        //creating a dialog box once the game ends to give the user options to how they want to proceed
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(alphabetGameLvl2.this);
+        //having a passing score will pop up a dialog box that allows the user to either go back to level page, replay, or go to the next level
         if(score > 6){
             alertDialogBuilder
                     .setMessage("Your final score is " + score + "/10\nYou unlocked Level 3!")
@@ -171,7 +182,14 @@ public class alphabetGameLvl2 extends AppCompatActivity {
                                     startActivity(new Intent(getApplicationContext(), alphabetGameLvl3.class));
                                 }
                             })
-                    .setNegativeButton("Back",
+                    .setNegativeButton("Replay",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    startActivity(new Intent(getApplicationContext(), alphabetGameLvl2.class));
+                                }
+                            })
+                    .setNeutralButton("Back",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -179,6 +197,7 @@ public class alphabetGameLvl2 extends AppCompatActivity {
                                 }
                             });
         }else {
+            //having a failing score will create a dialog box that only let's the user go back to level page or replay the level
             alertDialogBuilder
                     .setMessage("Your final score is " + score + "/10")
                     .setCancelable(false)
@@ -189,7 +208,7 @@ public class alphabetGameLvl2 extends AppCompatActivity {
                                     startActivity(new Intent(getApplicationContext(), alphabetGameLvl2.class));
                                 }
                             })
-                    .setNegativeButton("Back",
+                    .setNeutralButton("Back",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
