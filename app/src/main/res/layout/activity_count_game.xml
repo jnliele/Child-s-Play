@@ -9,23 +9,25 @@
 
     <Button
         android:id="@+id/Level1c"
-        android:layout_width="155dp"
-        android:layout_height="60dp"
-        android:text="Level One"
-        app:backgroundTint="#2196F3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        android:text="Level One: Numbers 0-5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.594" />
+        app:layout_constraintVertical_bias="0.526" />
 
     <Button
         android:id="@+id/Level2c"
-        android:layout_width="155dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:enabled="false"
-        android:text="Level Two"
-        app:backgroundTint="#2196F3"
+        android:text="Level Two: Numbers 0-10"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
         app:layout_constraintBottom_toTopOf="@+id/Level3c"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,12 +36,13 @@
 
     <Button
         android:id="@+id/Level3c"
-        android:layout_width="155dp"
-        android:layout_height="60dp"
-        android:enabled="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Level Three"
-        app:backgroundTint="#2196F3"
+        android:enabled="false"
+        android:text="Level Three: Numbers 0-20"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +58,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.29"
+        app:layout_constraintVertical_bias="0.227"
         app:srcCompat="@drawable/numbers" />
 
     <TextView
@@ -78,6 +81,7 @@
         android:gravity="center"
         android:text="Back To Home"
         android:textSize="30sp"
+        android:textColor="#AD87FF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

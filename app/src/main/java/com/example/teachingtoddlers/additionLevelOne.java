@@ -115,11 +115,10 @@ public class additionLevelOne extends AppCompatActivity {
                                     if(result> currentHighPercent && g.getTotalQuestions()> 5) {
                                         reference.child(Id).child("additionLevelOneScore").setValue(result);
                                         currentHighPercent =result;
-
-                                        if(currentHighPercent>= passingGrade);
-                                            btn_nextLevel.setVisibility(View.VISIBLE);
-
                                     }
+
+                                    if(currentHighPercent>= passingGrade);
+                                        btn_nextLevel.setVisibility(View.VISIBLE);
 
                                     levelOneTotalPlayCount = levelOneTotalPlayCount +temp;
                                     levelOneTotalquestions = levelOneTotalquestions + (g.getTotalQuestions() - 1);

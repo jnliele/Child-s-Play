@@ -33,14 +33,12 @@ public class addQuestions {
         this.answerPosition = randomNumberMaker.nextInt(4);
         this.answerArray= new int[]{0,1,2,3};
 
-        this.answerArray[0]= answer+4;
-        this.answerArray[1]= answer+3;
-        this.answerArray[2]= answer+2;
+        this.answerArray[0]= answer;
+        this.answerArray[1]= answer+10;
+        this.answerArray[2]= answer+11;
         this.answerArray[3]=answer+1;
 
         this.answerArray= shuffleArray(this.answerArray);
-
-        answerArray[answerPosition]=answer;
 
 
     }

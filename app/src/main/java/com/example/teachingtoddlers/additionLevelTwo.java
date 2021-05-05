@@ -99,19 +99,18 @@ public class additionLevelTwo extends AppCompatActivity {
                                     levelOneTotalCorrect = ds.child("additionLevelTwoCorrect").getValue(Long.class);
                                     levelOneTotalPlayCount = ds.child("additionLevelTwoTotalPlay").getValue(Long.class);
                                     levelOneTotalquestions = ds.child("additionLevelTwoTotal").getValue(Long.class);
-                                     currentHighPercent = ds.child("additionLevelTwoScore").getValue(Double.class);
+                                    currentHighPercent = ds.child("additionLevelTwoScore").getValue(Double.class);
 
-                                   double result =((double)(g.getNumberCorrect())/(double)(g.getTotalQuestions()-1));
+                                    double result =((double)(g.getNumberCorrect())/(double)(g.getTotalQuestions()-1));
 
 
                                     if(result > currentHighPercent && g.getTotalQuestions()> 5) {
                                         reference.child(Id).child("additionLevelTwoScore").setValue(result);
                                         currentHighPercent =result;
-
-                                        if(currentHighPercent>= passingGrade);
-                                        btn_nextLevel.setVisibility(View.VISIBLE);
-
                                     }
+
+                                    if(currentHighPercent>= passingGrade);
+                                        btn_nextLevel.setVisibility(View.VISIBLE);
 
                                     levelOneTotalPlayCount = levelOneTotalPlayCount +temp;
                                     levelOneTotalquestions = levelOneTotalquestions + (g.getTotalQuestions() - 1);
@@ -145,7 +144,7 @@ public class additionLevelTwo extends AppCompatActivity {
                     btn_nextLevel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            startActivity(new Intent(additionLevelTwo.this, additionLevelTwo.class));
+                            startActivity(new Intent(additionLevelTwo.this, additionLevelThree.class));
                         }
                     });
                 }

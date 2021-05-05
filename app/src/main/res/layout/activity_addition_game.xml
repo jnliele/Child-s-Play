@@ -13,29 +13,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:text="Addition Game"
-        android:textColor="#FFF"
-        android:textSize="22sp" />
+        android:textSize="30sp" />
 
 
     <pl.droidsonroids.gif.GifImageView
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:src= "@drawable/icons8rocket"
         android:layout_width="180dp"
         android:layout_height="180dp"/>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:text="Welcome! Choose a Level"
-        android:textAlignment="center"
-        android:textColor="#FFF"
-        android:textSize="24sp" />
 
 
     <Button
@@ -46,8 +34,7 @@
         android:layout_marginTop="30dp"
         android:layout_weight="1"
         android:paddingBottom="10dp"
-        android:text="Level One"
-        android:textAllCaps="false"
+        android:text="Level One: Single Digits"
         android:textColor="@color/white"
         android:textSize="15sp" />
 
@@ -55,14 +42,13 @@
         android:id="@+id/levelTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:enabled="false"
-
         android:layout_gravity="center"
+
         android:layout_marginTop="30dp"
         android:layout_weight="1"
+        android:enabled="false"
         android:paddingBottom="10dp"
-        android:text="Level Two"
-        android:textAllCaps="false"
+        android:text="Level Two: Double Digits"
         android:textColor="@color/white"
         android:textSize="15sp" />
 
@@ -71,13 +57,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:enabled="false"
-
         android:layout_marginTop="30dp"
+
         android:layout_weight="1"
+        android:enabled="false"
         android:paddingBottom="10dp"
-        android:text="Level Three"
-        android:textAllCaps="false"
+        android:text="Level Three: Triple Digits"
         android:textColor="@color/white"
         android:textSize="15sp" />
 
@@ -87,6 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
         android:text="Back to Home"
         android:textColor="#AD87FF"
         android:textSize="29dp" />

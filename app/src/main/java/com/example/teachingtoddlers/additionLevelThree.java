@@ -99,7 +99,7 @@ public class additionLevelThree extends AppCompatActivity {
                                     levelOneTotalPlayCount = ds.child("additionLevelThreeTotalPlay").getValue(Long.class);
                                     levelOneTotalquestions = ds.child("additionLevelThreeTotal").getValue(Long.class);
                                     currentHighPercent = ds.child("additionLevelThreeScore").getValue(Double.class);
-                                   double result =((double)(g.getNumberCorrect())/(double)(g.getTotalQuestions()-1));
+                                    double result =((double)(g.getNumberCorrect())/(double)(g.getTotalQuestions()-1));
 
 
                                     if(result> currentHighPercent && g.getTotalQuestions()> 5) {

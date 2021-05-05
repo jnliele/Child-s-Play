@@ -156,8 +156,9 @@
 
         <Button
             android:id="@+id/UserLogsOut"
-            android:layout_width="match_parent"
+            android:layout_width="293dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="39dp"
             android:text="log out" />
     </LinearLayout>
 
