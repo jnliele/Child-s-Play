@@ -163,7 +163,7 @@ public class alphabetGameLvl1 extends AppCompatActivity {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(alphabetGameLvl1.this);
         if(score > 6){
             alertDialogBuilder
-                    .setMessage("Your final score " + score + "/10\nYou unlocked Level 2!")
+                    .setMessage("Your final score is " + score + "/10\nYou unlocked Level 2!")
                     .setCancelable(false)
                     .setPositiveButton("Next Level",
                             new DialogInterface.OnClickListener() {
@@ -181,7 +181,7 @@ public class alphabetGameLvl1 extends AppCompatActivity {
                             });
         }else {
             alertDialogBuilder
-                    .setMessage("Your final score " + score + "/10")
+                    .setMessage("Your final score is " + score + "/10")
                     .setCancelable(false)
                     .setPositiveButton("Replay",
                             new DialogInterface.OnClickListener() {

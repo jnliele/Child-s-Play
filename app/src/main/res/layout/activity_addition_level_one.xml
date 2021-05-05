@@ -107,28 +107,28 @@
         <Button
             android:id="@+id/btn_answer0"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="59dp"
             android:text="Button" />
 
         <Button
             android:id="@+id/btn_answer1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="20dp"
             android:text="Button" />
 
         <Button
             android:id="@+id/btn_answer2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="20dp"
             android:text="Button" />
 
         <Button
             android:id="@+id/btn_answer3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="20dp"
             android:text="Button" />
 
 

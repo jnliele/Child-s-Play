@@ -164,13 +164,13 @@ public class countGameLvl2 extends AppCompatActivity {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( countGameLvl2.this);
         if(score > 6){
             alertDialogBuilder
-                    .setMessage("Your final score " + score + "/10\nYou unlocked Level 3!")
+                    .setMessage("Your final score is " + score + "/10\nYou unlocked Level 3!")
                     .setCancelable(false)
                     .setPositiveButton("Next Level",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    startActivity(new Intent(getApplicationContext(), countGameLvl2.class));
+                                    startActivity(new Intent(getApplicationContext(), countGameLvl3.class));
                                 }
                             })
                     .setNegativeButton("Back",
@@ -182,7 +182,7 @@ public class countGameLvl2 extends AppCompatActivity {
                             });
         }else {
             alertDialogBuilder
-                    .setMessage("Your final score " + score + "/10")
+                    .setMessage("Your final score is " + score + "/10")
                     .setCancelable(false)
                     .setPositiveButton("Replay",
                             new DialogInterface.OnClickListener() {

@@ -158,7 +158,7 @@ public class alphabetGameLvl3 extends AppCompatActivity {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(alphabetGameLvl3.this);
         if(score == 10){
             alertDialogBuilder
-                    .setMessage("Your final score " + score + "/10\nCongratulations, you have learned the alphabet!")
+                    .setMessage("Your final score is " + score + "/10\nCongratulations, you have learned the alphabet!")
                     .setCancelable(false)
                     .setPositiveButton("Replay",
                             new DialogInterface.OnClickListener() {
@@ -176,7 +176,7 @@ public class alphabetGameLvl3 extends AppCompatActivity {
                             });
         }else {
             alertDialogBuilder
-                    .setMessage("Your final score " + score + "/10")
+                    .setMessage("Your final score is " + score + "/10")
                     .setCancelable(false)
                     .setPositiveButton("Replay",
                             new DialogInterface.OnClickListener() {

@@ -162,11 +162,18 @@ public class countGameLvl3 extends AppCompatActivity {
 
         });
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(countGameLvl3.this);
-        if(score > 6){
+        if(score == 10){
             alertDialogBuilder
                     .setMessage("Congratulations! You mastered counting! Your final score is " + score + "/10")
                     .setCancelable(false)
-                    .setPositiveButton("Back",
+                    .setPositiveButton("Replay",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            startActivity(new Intent(getApplicationContext(), countGameLvl3.class));
+                        }
+                    })
+                    .setNegativeButton("Back",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -175,7 +182,7 @@ public class countGameLvl3 extends AppCompatActivity {
                             });
         }else {
             alertDialogBuilder
-                    .setMessage("Your final score " + score + "/10")
+                    .setMessage("Your final score is " + score + "/10")
                     .setCancelable(false)
                     .setPositiveButton("Replay",
                             new DialogInterface.OnClickListener() {

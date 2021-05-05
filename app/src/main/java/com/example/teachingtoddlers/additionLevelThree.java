@@ -74,6 +74,7 @@ public class additionLevelThree extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    btn_start.setText("Replay");
                     btn_start.setVisibility(View.VISIBLE);
                     btn_backToLevels.setVisibility(View.VISIBLE);
 
@@ -191,9 +192,10 @@ public class additionLevelThree extends AppCompatActivity {
 
         tv_timer.setText("0Sec");
         tv_questions.setText("");
-        tv_bottomMessage.setText("Press Go");
+        tv_bottomMessage.setText("0/0");
         tv_score.setText("0pts");
         prog_timer.setProgress(0);
+        btn_start.setText("Start Game");
 
 
         View.OnClickListener startButtonClickListener= new View.OnClickListener(){
