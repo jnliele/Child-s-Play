@@ -13,6 +13,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Email (Username)"
+        android:maxLength="50"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
