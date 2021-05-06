@@ -45,6 +45,7 @@ public class countGameLvl3 extends AppCompatActivity {
         temp++;
         ran = new Random();
 
+        //grabbing the id's from the xml
         Ans1 = (Button) findViewById(R.id.A);
         Ans2 = (Button) findViewById(R.id.B);
         Ans3 = (Button) findViewById(R.id.C);
@@ -55,6 +56,8 @@ public class countGameLvl3 extends AppCompatActivity {
 
         updateQuestion(ran.nextInt(questionNum));
 
+        //Setting up the answer choices to create a the game
+        //Game ends after 10 questions
         Ans1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vi) {
@@ -129,6 +132,7 @@ public class countGameLvl3 extends AppCompatActivity {
     }
 
     private void gameEnd() {
+        //setting up the firebase connection to update the information in the database for this account for this level.
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         rootNode= FirebaseDatabase.getInstance();
         reference =  rootNode.getReference("Users");
@@ -140,6 +144,7 @@ public class countGameLvl3 extends AppCompatActivity {
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     if (ds.child("email").getValue().equals(userEmail)) {
 
+                        //grabbing the current information in the database and updated the information
                         levelThreeTotalCorrect = ds.child("countingLevelThreeCorrect").getValue(Long.class);
                         levelThreeTotalPlayCount = ds.child("countingLevelThreeTotalPlay").getValue(Long.class);
                         levelThreeTotalquestions = ds.child("countingLevelThreeTotal").getValue(Long.class);
@@ -161,19 +166,22 @@ public class countGameLvl3 extends AppCompatActivity {
             }
 
         });
+        //creating a dialog box once the game ends to give the user options to how they want to proceed
+        //creating a dialog box once the game ends to give the user options to how they want to proceed
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(countGameLvl3.this);
-        if(score == 10){
+        //having a perfect score will create a dialog box congratulating the user and giving them a replay and back to level menu option
+        if(score > 6){
             alertDialogBuilder
-                    .setMessage("Congratulations! You mastered counting! Your final score is " + score + "/10")
+                    .setMessage("Your final score is " + score + "/10\nCongratulations, you have learned the counting!")
                     .setCancelable(false)
                     .setPositiveButton("Replay",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            startActivity(new Intent(getApplicationContext(), countGameLvl3.class));
-                        }
-                    })
-                    .setNegativeButton("Back",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    startActivity(new Intent(getApplicationContext(), countGameLvl3.class));
+                                }
+                            })
+                    .setNeutralButton("Back",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -191,7 +199,7 @@ public class countGameLvl3 extends AppCompatActivity {
                                     startActivity(new Intent(getApplicationContext(), countGameLvl3.class));
                                 }
                             })
-                    .setNegativeButton("Back",
+                    .setNeutralButton("Back",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
