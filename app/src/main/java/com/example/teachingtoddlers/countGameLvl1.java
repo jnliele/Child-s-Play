@@ -45,6 +45,7 @@ public class countGameLvl1 extends AppCompatActivity {
         temp++;
         ran = new Random();
 
+        //grabbing the id's from the xml
         Ans1 = (Button) findViewById(R.id.A);
         Ans2 = (Button) findViewById(R.id.B);
         Ans3 = (Button) findViewById(R.id.C);
@@ -55,10 +56,13 @@ public class countGameLvl1 extends AppCompatActivity {
 
         updateQuestion(ran.nextInt(questionNum));
 
+        //Setting up the answer choices to create a the game
+        //Game ends after 10 questions
         Ans1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vi) {
                 if(Ans1.getText() == answer){
+                    //increasing the score count when this button is the correct answer
                     score++;
                     Score.setText("Score: " + score);
                     Toast.makeText(countGameLvl1.this, "correct", Toast.LENGTH_SHORT).show();
@@ -126,6 +130,7 @@ public class countGameLvl1 extends AppCompatActivity {
     }
 
     private void gameEnd() {
+        //setting up the firebase connection to update the information in the database for this account for this level.
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         rootNode= FirebaseDatabase.getInstance();
         reference =  rootNode.getReference("Users");
@@ -137,6 +142,7 @@ public class countGameLvl1 extends AppCompatActivity {
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     if (ds.child("email").getValue().equals(userEmail)) {
 
+                        //grabbing the current information in the database and updated the information
                         levelOneTotalCorrect = ds.child("countingLevelOneCorrect").getValue(Long.class);
                         levelOneTotalPlayCount = ds.child("countingLevelOneTotalPlay").getValue(Long.class);
                         levelOneTotalquestions = ds.child("countingLevelOneTotal").getValue(Long.class);
@@ -161,7 +167,9 @@ public class countGameLvl1 extends AppCompatActivity {
             }
 
         });
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( countGameLvl1.this);
+        //creating a dialog box once the game ends to give the user options to how they want to proceed
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(countGameLvl1.this);
+        //having a passing score will pop up a dialog box that allows the user to either go back to level page, replay, or go to the next level
         if(score > 6){
             alertDialogBuilder
                     .setMessage("Your final score is " + score + "/10\nYou unlocked Level 2!")
@@ -173,7 +181,14 @@ public class countGameLvl1 extends AppCompatActivity {
                                     startActivity(new Intent(getApplicationContext(), countGameLvl2.class));
                                 }
                             })
-                    .setNegativeButton("Back",
+                    .setNegativeButton("Replay",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    startActivity(new Intent(getApplicationContext(), countGameLvl1.class));
+                                }
+                            })
+                    .setNeutralButton("Back",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -181,6 +196,7 @@ public class countGameLvl1 extends AppCompatActivity {
                                 }
                             });
         }else {
+            //having a failing score will create a dialog box that only let's the user go back to level page or replay the level
             alertDialogBuilder
                     .setMessage("Your final score is " + score + "/10")
                     .setCancelable(false)
@@ -191,7 +207,7 @@ public class countGameLvl1 extends AppCompatActivity {
                                     startActivity(new Intent(getApplicationContext(), countGameLvl1.class));
                                 }
                             })
-                    .setNegativeButton("Back",
+                    .setNeutralButton("Back",
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
