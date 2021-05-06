@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/homeScreen"
-        android:name="com.example.teachingtoddlers.homeScreen"
+        android:name="com.example.childsplay.homeScreen"
         android:label="fragment_home_screen"
         tools:layout="@layout/fragment_home_screen" />
     <fragment
         android:id="@+id/profilePage"
-        android:name="com.example.teachingtoddlers.profilePage"
+        android:name="com.example.childsplay.profilePage"
         android:label="fragment_profile_page"
         tools:layout="@layout/fragment_profile_page" />
 </navigation>
