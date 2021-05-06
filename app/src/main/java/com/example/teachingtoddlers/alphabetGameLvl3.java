@@ -166,7 +166,7 @@ public class alphabetGameLvl3 extends AppCompatActivity {
         //creating a dialog box once the game ends to give the user options to how they want to proceed
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(alphabetGameLvl3.this);
         //having a perfect score will create a dialog box congratulating the user and giving them a replay and back to level menu option
-        if(score == 10){
+        if(score > 6){
             alertDialogBuilder
                     .setMessage("Your final score is " + score + "/10\nCongratulations, you have learned the alphabet!")
                     .setCancelable(false)
