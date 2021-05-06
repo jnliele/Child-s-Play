@@ -172,7 +172,7 @@ public class countGameLvl3 extends AppCompatActivity {
         //having a perfect score will create a dialog box congratulating the user and giving them a replay and back to level menu option
         if(score > 6){
             alertDialogBuilder
-                    .setMessage("Your final score is " + score + "/10\nCongratulations, you have learned Counting!")
+                    .setMessage("Your final score is " + score + "/10\nCongratulations, you have learned counting!")
                     .setCancelable(false)
                     .setPositiveButton("Replay",
                             new DialogInterface.OnClickListener() {

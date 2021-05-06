@@ -88,7 +88,7 @@ public class additionLevelThree extends AppCompatActivity {
                     {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot ds : snapshot.getChildren()) {
+                            for (DataSnapshot ds : snapshot.getChildren()) {
                                 if (ds.child("email").getValue().equals(userEmail)) {
 
                                     //gets the users individual information from firebase
@@ -96,20 +96,20 @@ public class additionLevelThree extends AppCompatActivity {
                                     levelOneTotalPlayCount = ds.child("additionLevelThreeTotalPlay").getValue(Long.class);
                                     levelOneTotalquestions = ds.child("additionLevelThreeTotal").getValue(Long.class);
                                     currentHighPercent = ds.child("additionLevelThreeScore").getValue(Double.class);
-                                    double result =((double)(g.getNumberCorrect())/(double)(g.getTotalQuestions()-1));
+                                    double result = ((double) (g.getNumberCorrect()) / (double) (g.getTotalQuestions() - 1));
 
-                                    if(result> currentHighPercent && g.getTotalQuestions()>= 3) {//updates users high score
+                                    if (result > currentHighPercent && g.getTotalQuestions() >= 3) {//updates users high score
                                         reference.child(Id).child("additionLevelThreeScore").setValue(result);
                                         currentHighPercent = result;
                                     }
 
-                                    if(result>= passingGrade)
+                                    if (result >= passingGrade) {
                                         Toast.makeText(additionLevelThree.this, "Congratulations! You beat the game!", Toast.LENGTH_LONG).show();
-                                }
+                                    }
 
 
                                     //update firebase with users information
-                                    levelOneTotalPlayCount = levelOneTotalPlayCount +temp;
+                                    levelOneTotalPlayCount = levelOneTotalPlayCount + temp;
                                     levelOneTotalquestions = levelOneTotalquestions + (g.getTotalQuestions() - 1);
                                     levelOneTotalCorrect = levelOneTotalCorrect + numCorrectAnswers;
                                     reference.child(Id).child("additionLevelThreeCorrect").setValue(levelOneTotalCorrect);
@@ -119,7 +119,7 @@ public class additionLevelThree extends AppCompatActivity {
 
                                 }
                             }
-
+                        }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
