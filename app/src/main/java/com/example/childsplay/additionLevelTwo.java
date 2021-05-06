@@ -194,7 +194,7 @@ public class additionLevelTwo extends AppCompatActivity {
         tv_bottomMessage.setText("0/0");
         tv_score.setText("0pts");
         prog_timer.setProgress(0);
-        btn_start.setText("Start Game\n get five right to move on");
+        btn_start.setText("Start Game\n get five right");
 
         //action once the start button is clicked
         View.OnClickListener startButtonClickListener= new View.OnClickListener(){
