@@ -171,7 +171,7 @@ public class countGameLvl2 extends AppCompatActivity {
         //having a passing score will pop up a dialog box that allows the user to either go back to level page, replay, or go to the next level
         if(score > 6){
             alertDialogBuilder
-                    .setMessage("Your final score is " + score + "/10\nYou unlocked Level 2!")
+                    .setMessage("Your final score is " + score + "/10\nYou unlocked Level 3!")
                     .setCancelable(false)
                     .setPositiveButton("Next Level",
                             new DialogInterface.OnClickListener() {
