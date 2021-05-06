@@ -34,20 +34,18 @@ public class additionLevelTwo extends AppCompatActivity {
     int highScore=0;
     long numCorrectAnswers =0;
     ConstraintLayout rootLayout;
-    Double currentHighPercent, passingGrade = .70;
+    double currentHighPercent, passingGrade = .70;
     AnimationDrawable animationDrawable;
-
     long levelOneTotalquestions;
-    String Id, levelOneTotalCorrectStr;
+    String Id;
     User user;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-
-
-
     additonGameCode g = new additonGameCode();
     int secondsRemaining =30;
 
+
+    //counts down the seconds and displays on the game screen
     CountDownTimer timer = new CountDownTimer(30000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
@@ -59,7 +57,7 @@ public class additionLevelTwo extends AppCompatActivity {
         }
 
         @Override
-        public void onFinish() {
+        public void onFinish() {// code that runs after the level is finished
 
             btn_answer0.setEnabled(false);
             btn_answer1.setEnabled(false);
@@ -71,25 +69,22 @@ public class additionLevelTwo extends AppCompatActivity {
 
             final Handler handler = new Handler();
 
-            handler.postDelayed(new Runnable() {
+            handler.postDelayed(new Runnable() {//this will delay the visibility of the buttons
                 @Override
                 public void run() {
                     btn_start.setText("Replay");
                     btn_start.setVisibility(View.VISIBLE);
                     btn_backToLevels.setVisibility(View.VISIBLE);
 
-
+                    //connect to the users information that is currently logged in
                     String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                     rootNode= FirebaseDatabase.getInstance();
                     reference =  rootNode.getReference("Users");
-
                     Id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
 
                     // find the account user is signed in and update correct information for admin profile
-
-
                     reference.addListenerForSingleValueEvent(new ValueEventListener()
                     {
                         @Override
@@ -97,6 +92,7 @@ public class additionLevelTwo extends AppCompatActivity {
                             for(DataSnapshot ds : snapshot.getChildren()) {
                                 if (ds.child("email").getValue().equals(userEmail)) {
 
+                                    //gets the users individual information from firebase
                                     levelOneTotalCorrect = ds.child("additionLevelTwoCorrect").getValue(Long.class);
                                     levelOneTotalPlayCount = ds.child("additionLevelTwoTotalPlay").getValue(Long.class);
                                     levelOneTotalquestions = ds.child("additionLevelTwoTotal").getValue(Long.class);
@@ -110,13 +106,14 @@ public class additionLevelTwo extends AppCompatActivity {
                                         currentHighPercent =result;
                                     }
 
-                                    if(currentHighPercent>= passingGrade);
+                                    if(currentHighPercent>= passingGrade)
                                         btn_nextLevel.setVisibility(View.VISIBLE);
 
+
+                                    //update firebase with users information
                                     levelOneTotalPlayCount = levelOneTotalPlayCount +temp;
                                     levelOneTotalquestions = levelOneTotalquestions + (g.getTotalQuestions() - 1);
                                     levelOneTotalCorrect = levelOneTotalCorrect + numCorrectAnswers;
-
 
                                     reference.child(Id).child("additionLevelTwoCorrect").setValue(levelOneTotalCorrect);
                                     reference.child(Id).child("additionLevelTwoTotalPlay").setValue(levelOneTotalPlayCount);
@@ -133,7 +130,7 @@ public class additionLevelTwo extends AppCompatActivity {
 
                     });
 
-
+                    // goes back to the choosing levels page
                     btn_backToLevels.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -141,7 +138,7 @@ public class additionLevelTwo extends AppCompatActivity {
                         }
                     });
 
-
+                    //continues onto the next level
                     btn_nextLevel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -150,30 +147,26 @@ public class additionLevelTwo extends AppCompatActivity {
                     });
                 }
 
-            }, 4000);
+            }, 4000); //the visibility of the buttons is delayed by 4 seconds
         }
     };
 
 
 
-
-
     @SuppressLint("ResourceType")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {// function that connects the xml
         super.onCreate(savedInstanceState);
         setContentView(activity_addition_level_one);
 
+        //animates the background of the game
         rootLayout = (ConstraintLayout)(findViewById(R.id.addLevelOneView));
         animationDrawable = (AnimationDrawable)(rootLayout.getBackground());
         animationDrawable.setEnterFadeDuration(10);
         animationDrawable.setExitFadeDuration(2000);
         animationDrawable.start();
 
-
-
-
-
+        //connects to all the buttons
         btn_backToLevels =findViewById(R.id.btn_backToLevels);
         btn_nextLevel= findViewById(R.id.btn_nextLevel);
         btn_start = findViewById(R.id.btn_start);
@@ -183,22 +176,27 @@ public class additionLevelTwo extends AppCompatActivity {
         btn_answer3 = findViewById(R.id.btn_answer3);
         TwoButton = (Button) findViewById(R.id.levelTwo);
 
-
-
+        //disables the buttons before start in case of mis-click
         tv_score = findViewById(R.id.tv_score);
         tv_bottomMessage=findViewById(R.id.tv_bottomMessage);
         tv_questions = findViewById(R.id.tv_questions);
         tv_timer = findViewById(R.id.tv_timer);
         prog_timer = findViewById(R.id.prog_timer);
 
+        //the preset on screen visual for the game
+        btn_answer0.setEnabled(false);
+        btn_answer1.setEnabled(false);
+        btn_answer2.setEnabled(false);
+        btn_answer3.setEnabled(false);
+
         tv_timer.setText("0Sec");
         tv_questions.setText("");
         tv_bottomMessage.setText("0/0");
         tv_score.setText("0pts");
         prog_timer.setProgress(0);
-        btn_start.setText("Start Game");
+        btn_start.setText("Start Game\n get five right to move on");
 
-
+        //action once the start button is clicked
         View.OnClickListener startButtonClickListener= new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -216,7 +214,7 @@ public class additionLevelTwo extends AppCompatActivity {
             }
         };
 
-
+        //action once the user clicks an answer
         View.OnClickListener answerButtonClickListener= new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -229,6 +227,7 @@ public class additionLevelTwo extends AppCompatActivity {
 
             }
         };
+        //sets action listener for every button once clicked by the user
         btn_start.setOnClickListener(startButtonClickListener);
         btn_answer0.setOnClickListener(answerButtonClickListener);
         btn_answer1.setOnClickListener(answerButtonClickListener);
@@ -237,11 +236,13 @@ public class additionLevelTwo extends AppCompatActivity {
 
     }
 
+    //moves onto the next question
     private void nextTurn()
     {
         g.makeNewQuestion2();
         int [] answer = g.getCurrentQuestion().getAnswerArray();
 
+        //sets 3 random numbers to the buttons along with the correct one
         btn_answer0.setText(Integer.toString(answer[0]));
         btn_answer1.setText(Integer.toString(answer[1]));
         btn_answer2.setText(Integer.toString(answer[2]));
@@ -252,9 +253,8 @@ public class additionLevelTwo extends AppCompatActivity {
         btn_answer2.setEnabled(true);
         btn_answer3.setEnabled(true);
         tv_questions.setText(g.getCurrentQuestion().getQuestionPhrase());
-        tv_bottomMessage.setText(g.getNumberCorrect() + "/" + (g.getTotalQuestions()-1));
+        tv_bottomMessage.setText(g.getNumberCorrect() + "/" + (g.getTotalQuestions()-1));//sets the correct score and total score
         numCorrectAnswers = g.getNumberCorrect();
 
-//            tv_bottomMessage.setText(g.getNumberCorrect() + "/" + (g.getTotalQuestions()-1));
     }
 }

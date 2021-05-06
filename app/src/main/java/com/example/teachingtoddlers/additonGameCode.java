@@ -12,11 +12,12 @@ public class additonGameCode {
     private int score;
     private addQuestions currentQuestion;
 
+    //empty constructor
     public  additonGameCode (){
 
     }
 
-
+    //sets the presets of the game and the upper limit(how high the numbers go to add) for level one
     public void additonGameCode1(){
 
         numberCorrect = 0;
@@ -27,7 +28,7 @@ public class additonGameCode {
         questions = new ArrayList<>();
 
     }
-
+    //sets a new question for level one
     public void makeNewQuestion(){
 
         currentQuestion= new addQuestions(9);
@@ -35,6 +36,8 @@ public class additonGameCode {
         questions.add(currentQuestion);
 
     }
+
+    //sets the presets of the game and the upper limit(how high the numbers go to add) for level two
     public void additonGameCode2(){
 
         numberCorrect = 0;
@@ -45,7 +48,7 @@ public class additonGameCode {
         questions = new ArrayList<>();
 
     }
-
+    //sets a new question for level one
     public void makeNewQuestion2(){
 
         currentQuestion= new addQuestions(99);
@@ -54,6 +57,7 @@ public class additonGameCode {
 
     }
 
+    //sets the presets of the game and the upper limit(how high the numbers go to add) for level three
     public void additonGameCode3(){
 
         numberCorrect = 0;
@@ -64,9 +68,8 @@ public class additonGameCode {
         questions = new ArrayList<>();
 
     }
-
+    //sets a new question for level one
     public void makeNewQuestion3(){
-
         currentQuestion= new addQuestions(999);
         totalQuestions++;
         questions.add(currentQuestion);
@@ -76,7 +79,7 @@ public class additonGameCode {
 
 
 
-
+    //checks to see if the answer the user chose was correct
     public boolean checkAnswer(int submittedAnswer){
         boolean isCorrect;
         if(currentQuestion.getAnswer()==submittedAnswer){

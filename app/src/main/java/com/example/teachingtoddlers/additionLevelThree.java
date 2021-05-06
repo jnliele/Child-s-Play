@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -25,29 +26,25 @@ import com.google.firebase.database.ValueEventListener;
 import static com.example.teachingtoddlers.R.layout.activity_addition_level_one;
 
 public class additionLevelThree extends AppCompatActivity {
-    Button unlockLevelTwo;
+
     Button btn_start, btn_answer0, btn_answer1,btn_answer2, btn_answer3,btn_nextLevel, btn_backToLevels, TwoButton;
     TextView tv_score, tv_questions, tv_timer, tv_bottomMessage;
     ProgressBar prog_timer;
     long levelOneTotalPlayCount=0, temp=0;
     long levelOneTotalCorrect;
-    Double currentHighPercent, passingGrade = .70;
+    double currentHighPercent, passingGrade = .70;
     int highScore=0;
     long numCorrectAnswers =0;
     ConstraintLayout rootLayout;
     AnimationDrawable animationDrawable;
-
     long levelOneTotalquestions;
-    String Id, levelOneTotalCorrectStr;
-    User user;
+    String Id;
     FirebaseDatabase rootNode;
     DatabaseReference reference;
-
-
-
     additonGameCode g = new additonGameCode();
     int secondsRemaining =30;
 
+    //counts down the seconds and displays on the game screen
     CountDownTimer timer = new CountDownTimer(30000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
@@ -59,7 +56,7 @@ public class additionLevelThree extends AppCompatActivity {
         }
 
         @Override
-        public void onFinish() {
+        public void onFinish() {// code that runs after the level is finished
 
             btn_answer0.setEnabled(false);
             btn_answer1.setEnabled(false);
@@ -71,24 +68,22 @@ public class additionLevelThree extends AppCompatActivity {
 
             final Handler handler = new Handler();
 
-            handler.postDelayed(new Runnable() {
+            handler.postDelayed(new Runnable() {//this will delay the visibility of the buttons
                 @Override
                 public void run() {
                     btn_start.setText("Replay");
                     btn_start.setVisibility(View.VISIBLE);
                     btn_backToLevels.setVisibility(View.VISIBLE);
 
-
+                    //connect to the users information that is currently logged in
                     String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                     rootNode= FirebaseDatabase.getInstance();
                     reference =  rootNode.getReference("Users");
-
                     Id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
 
                     // find the account user is signed in and update correct information for admin profile
-
                     reference.addListenerForSingleValueEvent(new ValueEventListener()
                     {
                         @Override
@@ -96,24 +91,27 @@ public class additionLevelThree extends AppCompatActivity {
                             for(DataSnapshot ds : snapshot.getChildren()) {
                                 if (ds.child("email").getValue().equals(userEmail)) {
 
+                                    //gets the users individual information from firebase
                                     levelOneTotalCorrect = ds.child("additionLevelThreeCorrect").getValue(Long.class);
                                     levelOneTotalPlayCount = ds.child("additionLevelThreeTotalPlay").getValue(Long.class);
                                     levelOneTotalquestions = ds.child("additionLevelThreeTotal").getValue(Long.class);
                                     currentHighPercent = ds.child("additionLevelThreeScore").getValue(Double.class);
                                     double result =((double)(g.getNumberCorrect())/(double)(g.getTotalQuestions()-1));
 
-
-                                    if(result> currentHighPercent && g.getTotalQuestions()> 5) {
+                                    if(result> currentHighPercent && g.getTotalQuestions()> 3) {//updates users high score
                                         reference.child(Id).child("additionLevelThreeScore").setValue(result);
                                         currentHighPercent = result;
-
                                     }
 
+                                    if(result>= passingGrade)
+                                        Toast.makeText(additionLevelThree.this, "Congratulations! You beat the game!", Toast.LENGTH_LONG).show();
+                                }
+
+
+                                    //update firebase with users information
                                     levelOneTotalPlayCount = levelOneTotalPlayCount +temp;
                                     levelOneTotalquestions = levelOneTotalquestions + (g.getTotalQuestions() - 1);
                                     levelOneTotalCorrect = levelOneTotalCorrect + numCorrectAnswers;
-
-
                                     reference.child(Id).child("additionLevelThreeCorrect").setValue(levelOneTotalCorrect);
                                     reference.child(Id).child("additionLevelThreeTotalPlay").setValue(levelOneTotalPlayCount);
                                     reference.child(Id).child("additionLevelThreeTotal").setValue(levelOneTotalquestions);
@@ -121,7 +119,8 @@ public class additionLevelThree extends AppCompatActivity {
 
                                 }
                             }
-                        }
+
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
@@ -130,7 +129,7 @@ public class additionLevelThree extends AppCompatActivity {
                     });
 
 
-
+                    // goes back to the choosing levels page
                     btn_backToLevels.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -138,7 +137,7 @@ public class additionLevelThree extends AppCompatActivity {
                         }
                     });
 
-
+                    //continues onto the next level
                     btn_nextLevel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -147,32 +146,26 @@ public class additionLevelThree extends AppCompatActivity {
                     });
                 }
 
-            }, 4000);
+            }, 4000);//the visibility of the buttons is delayed by 4 seconds
 
 
         }
     };
 
-
-
-
-
     @SuppressLint("ResourceType")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {// function that connects the xml
         super.onCreate(savedInstanceState);
         setContentView(activity_addition_level_one);
 
+        //animates the background of the game
         rootLayout = (ConstraintLayout)(findViewById(R.id.addLevelOneView));
         animationDrawable = (AnimationDrawable)(rootLayout.getBackground());
         animationDrawable.setEnterFadeDuration(10);
         animationDrawable.setExitFadeDuration(2000);
         animationDrawable.start();
 
-
-
-
-
+        //connects to all the buttons
         btn_backToLevels =findViewById(R.id.btn_backToLevels);
         btn_nextLevel= findViewById(R.id.btn_nextLevel);
         btn_start = findViewById(R.id.btn_start);
@@ -181,28 +174,32 @@ public class additionLevelThree extends AppCompatActivity {
         btn_answer2 = findViewById(R.id.btn_answer2);
         btn_answer3 = findViewById(R.id.btn_answer3);
         TwoButton = (Button) findViewById(R.id.levelTwo);
-
-
-
         tv_score = findViewById(R.id.tv_score);
         tv_bottomMessage=findViewById(R.id.tv_bottomMessage);
         tv_questions = findViewById(R.id.tv_questions);
         tv_timer = findViewById(R.id.tv_timer);
         prog_timer = findViewById(R.id.prog_timer);
 
+        //disables the buttons before start in case of mis-click
+        btn_answer0.setEnabled(false);
+        btn_answer1.setEnabled(false);
+        btn_answer2.setEnabled(false);
+        btn_answer3.setEnabled(false);
+
+        //the preset on screen visual for the game
         tv_timer.setText("0Sec");
         tv_questions.setText("");
         tv_bottomMessage.setText("0/0");
         tv_score.setText("0pts");
         prog_timer.setProgress(0);
-        btn_start.setText("Start Game");
+        btn_start.setText("Start Game\n get three right to win");
 
 
+
+        //action once the start button is clicked
         View.OnClickListener startButtonClickListener= new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-
 
                 Button start_button= (Button)v;
                 start_button.setVisibility(View.INVISIBLE);
@@ -217,7 +214,7 @@ public class additionLevelThree extends AppCompatActivity {
             }
         };
 
-
+        //action once the user clicks an answer
         View.OnClickListener answerButtonClickListener= new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -238,24 +235,28 @@ public class additionLevelThree extends AppCompatActivity {
 
     }
 
+
+
+    //moves onto the next question
     private void nextTurn()
     {
         g.makeNewQuestion3();
         int [] answer = g.getCurrentQuestion().getAnswerArray();
 
+        //sets 3 random numbers to the buttons along with the correct one
         btn_answer0.setText(Integer.toString(answer[0]));
         btn_answer1.setText(Integer.toString(answer[1]));
         btn_answer2.setText(Integer.toString(answer[2]));
         btn_answer3.setText(Integer.toString(answer[3]));
+
 
         btn_answer0.setEnabled(true);
         btn_answer1.setEnabled(true);
         btn_answer2.setEnabled(true);
         btn_answer3.setEnabled(true);
         tv_questions.setText(g.getCurrentQuestion().getQuestionPhrase());
-        tv_bottomMessage.setText(g.getNumberCorrect() + "/" + (g.getTotalQuestions()-1));
+        tv_bottomMessage.setText(g.getNumberCorrect() + "/" + (g.getTotalQuestions()-1));//sets the correct score and total score
         numCorrectAnswers = g.getNumberCorrect();
 
-//            tv_bottomMessage.setText(g.getNumberCorrect() + "/" + (g.getTotalQuestions()-1));
     }
 }

@@ -7,19 +7,13 @@ public class addQuestions {
     private int firstNumber;
     private int secondNumber;
     private int answer;
-
-
     private int [] answerArray;
-
-
     private int answerPosition;
-
-
     private int upperLimit;
-
-
     private String questionPhrase;
 
+
+    //passes in the number of how high the numbers want to be displayed
     public addQuestions(int upperLimit){
 
         this.upperLimit=upperLimit;
@@ -30,9 +24,10 @@ public class addQuestions {
         this.answer = this.firstNumber + this.secondNumber;
         this.questionPhrase = firstNumber + " + " + secondNumber + " = ";
 
+
+        //creates 4 answers including one being correct
         this.answerPosition = randomNumberMaker.nextInt(4);
         this.answerArray= new int[]{0,1,2,3};
-
         this.answerArray[0]= answer;
         this.answerArray[1]= answer+10;
         this.answerArray[2]= answer+11;
@@ -42,7 +37,7 @@ public class addQuestions {
 
 
     }
-
+    //shuffles the position of the 4 given potential answers
     private int [] shuffleArray(int [] array) {
         int index, temp;
         Random randomNumberGen = new Random();
