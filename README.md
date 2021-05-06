@@ -5,7 +5,7 @@ README
 Instructions to run the code:
 1. Android Studio needs to be installed to run the code
 
-2. Unzip the project file “Child-s-Play.zip” and import it into Android Studio via “Import Project (Gradle, Eclipse ADT, etc.)”
+2. After unzipping the file, and import the extracted project folder into Android Studio via “Import Project (Gradle, Eclipse ADT, etc.)”
 
 3. Ensure the SDK is “Android 11.0 (R)", or download it by going to File->Settings->System Settings->Android SDK, check only “Android 11.0 (R)", 
 press OK and install the SDK if needed
