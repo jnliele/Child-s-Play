@@ -109,7 +109,7 @@ public class additionLevelOne extends AppCompatActivity {
                                     result =((double)(g.getNumberCorrect())/(double)(g.getTotalQuestions()-1));
 
 
-                                    if(result> currentHighPercent && g.getTotalQuestions()> 5) {//updates users high score
+                                    if(result> currentHighPercent && g.getTotalQuestions()>= 5) {//updates users high score
                                         reference.child(Id).child("additionLevelOneScore").setValue(result);
                                         currentHighPercent =result;
                                     }

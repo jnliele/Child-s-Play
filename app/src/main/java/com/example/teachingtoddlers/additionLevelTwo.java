@@ -101,7 +101,7 @@ public class additionLevelTwo extends AppCompatActivity {
                                     double result =((double)(g.getNumberCorrect())/(double)(g.getTotalQuestions()-1));
 
 
-                                    if(result > currentHighPercent && g.getTotalQuestions()> 5) {
+                                    if(result > currentHighPercent && g.getTotalQuestions()>= 5) {
                                         reference.child(Id).child("additionLevelTwoScore").setValue(result);
                                         currentHighPercent =result;
                                     }
